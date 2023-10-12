@@ -10,43 +10,45 @@ import React from "react";
 
 export function NavigationBar(){
     return (
-        <div className="topnav">
 
-            <div className="topnav-centered">
-                <a href="#" className="home"><FontAwesomeIcon icon={faHouse} /></a>
-                <a href="#" className="message"><FontAwesomeIcon icon={faEnvelope} /></a>
-                <div className="input-group search">
-                    <div className="form-outline">
-                        <input type="search" id="form1" className="form-control" placeholder="Search friends"/>
-                    </div>
-                    <button type="button" className="btn btn-dark">
-                        <FontAwesomeIcon icon={faMagnifyingGlass} />
-                    </button>
-                </div>
+
+        <nav className="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
+            <a href="/" className="navbar-brand d-flex w-50 mr-auto">POKE<FontAwesomeIcon icon={faCat} bounce /></a>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+                <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="navbar-collapse collapse w-100" id="collapsingNavbar3">
+                <ul className="navbar-nav w-100 justify-content-center">
+                    <li className="nav-item active">
+                        <a className="nav-link" href="#"><FontAwesomeIcon icon={faHouse} /></a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="//codeply.com"><FontAwesomeIcon icon={faEnvelope} /></a>
+                    </li>
+                    <li className="nav-item d-md-none d-lg-block">
+                        <div className="input-group search">
+                            <div className="form-outline">
+                                <input type="search" id="form1" className="form-control" placeholder="Search friends"/>
+                            </div>
+                            <button type="button" className="btn btn-dark">
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+                <ul className="nav navbar-nav ml-auto w-100 justify-content-end">
+                    <li className="nav-item">
+                        <a href="#"><FontAwesomeIcon icon={faUser} /></a>
+                    </li>
+                    <li className="nav-item">
+                        <a href="#"><FontAwesomeIcon icon={faGear} /></a>
+                    </li>
+                    <li className="nav-item">
+                        <a href="#"><FontAwesomeIcon icon={faBell} /></a>
+                    </li>
+                </ul>
             </div>
+        </nav>
 
-            <a href="#">Nudge<FontAwesomeIcon icon={faCat} bounce /></a>
-
-
-            <div className="topnav-right">
-                <a href="#"><FontAwesomeIcon icon={faUser} /></a>
-                <a href="#"><FontAwesomeIcon icon={faGear} /></a>
-                <a href="#"><FontAwesomeIcon icon={faBell} /></a>
-                <a>
-                    <Dropdown>
-                        <Dropdown.Toggle variant="dark" id="dropdown-basic">
-                            Profile
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu>
-                            <Dropdown.Item href="#/action-1">Logout</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Invite friends</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </a>
-
-            </div>
-
-        </div>
     );
 }
