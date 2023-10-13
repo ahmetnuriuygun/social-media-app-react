@@ -1,18 +1,28 @@
 import {NavigationBar} from "../Components/Navbar";
+import {LeftSidebar} from "../Components/LeftSidebar";
 import {RightSidebar} from "../Components/RightSidebar";
+import {RandomPictures} from "../Components/RandomPictures";
 
-export function Home(){
-    return(
-        <div className="w-full">
-            <div className="fixed top-0 z-10 w-full bg-white">
-                <NavigationBar></NavigationBar>
-            </div>
-            <div className="flex bg-gray-100">
-                <div className="flex-auto w-[20%] fixed top-12">
-                    <RightSidebar></RightSidebar>
+export function Home() {
+    return (
+        <>
+            <NavigationBar/>
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-4">
+                        <LeftSidebar/>
+                    </div>
+                    <div className="col-lg-4">
+                        <RandomPictures/>
+                    </div>
+                    <div className="col-lg-4">
+                        <RightSidebar/>
+                    </div>
                 </div>
             </div>
-        </div>
-        )
+
+        </>
+
+    )
 
 }

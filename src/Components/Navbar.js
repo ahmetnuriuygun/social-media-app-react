@@ -13,7 +13,7 @@ export function NavigationBar(){
 
 
         <nav className="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
-            <a href="/" className="navbar-brand d-flex w-50 mr-auto">POKE<FontAwesomeIcon icon={faCat} bounce /></a>
+            <a href="/" className="navbar-brand d-flex w-50 mr-auto header-logo text-primary">POKE<FontAwesomeIcon icon={faCat} bounce /></a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
                 <span className="navbar-toggler-icon"></span>
             </button>
@@ -25,7 +25,7 @@ export function NavigationBar(){
                     <li className="nav-item">
                         <a className="nav-link" href="//codeply.com"><FontAwesomeIcon icon={faEnvelope} /></a>
                     </li>
-                    <li className="nav-item d-md-none d-lg-block">
+                    <li className=" d-md-none d-lg-block">
                         <div className="input-group search">
                             <div className="form-outline">
                                 <input type="search" id="form1" className="form-control" placeholder="Search friends"/>
