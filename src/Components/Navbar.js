@@ -12,7 +12,7 @@ export function NavigationBar(){
     return (
 
 
-        <nav className="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
+        <nav className="navbar navbar-light navbar-expand-sm bg-faded justify-content-center">
             <a href="/" className="navbar-brand d-flex w-50 mr-auto header-logo text-primary">POKE<FontAwesomeIcon icon={faCat} bounce /></a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
                 <span className="navbar-toggler-icon"></span>
@@ -25,8 +25,8 @@ export function NavigationBar(){
                     <li className="nav-item">
                         <a className="nav-link" href="//codeply.com"><FontAwesomeIcon icon={faEnvelope} /></a>
                     </li>
-                    <li className=" d-md-none d-lg-block">
-                        <div className="input-group search">
+                    <li className=" d-none d-xl-block">
+                        <div className="input-group search ">
                             <div className="form-outline">
                                 <input type="search" id="search-input" className="form-control" placeholder="Search friends"/>
                             </div>
@@ -36,7 +36,7 @@ export function NavigationBar(){
                         </div>
                     </li>
                 </ul>
-                <ul className="nav navbar-nav ml-auto w-100 justify-content-end">
+                <ul className="nav navbar-nav ml-auto w-100 justify-content-end d-sm-none d-md-flex ">
                     <li className="nav-item">
                         <a href="#"><FontAwesomeIcon icon={faUser} /></a>
                     </li>

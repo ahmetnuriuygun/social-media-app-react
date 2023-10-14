@@ -1,4 +1,4 @@
-export const ACTIVE_USER=[
+export const ACTIVE_USER=
     {
         userId: 1,
         firstName: "Fjodor",
@@ -7,8 +7,8 @@ export const ACTIVE_USER=[
         country:"Russia",
         city:"Moscow",
         friends:[2,3,4,5,6,7,8,9,10,11,12,13,14]
-    },
-]
+    }
+
 
 
 export const USER_DATA = [
@@ -56,7 +56,7 @@ export const USER_DATA = [
         userId: 7,
         firstName: "Sigmund",
         lastName: "Freud",
-        profileImg: "friends1.jpeg",
+        profileImg: "friends4.jpeg",
         country: "Austria",
         city: "Vienna",
     },
@@ -104,7 +104,7 @@ export const USER_DATA = [
         userId: 13,
         firstName: "Stefan",
         lastName: "Zweig",
-        profileImg: "friends1.jpeg",
+        profileImg: "friends5.jpeg",
         country: "Austria",
         city: "Vienna",
     },{
@@ -119,23 +119,27 @@ export const USER_DATA = [
 
 export const POSTS_DATA = [
     {
+        postId:1,
         userId:3,
-        postImg:"https://picsum.photos/200/370",
+        postImg:"https://picsum.photos/201",
         description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
     },
     {
+        postId:2,
         userId:6,
-        postImg:"https://picsum.photos/200/373",
+        postImg:"https://picsum.photos/202",
         description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
     },
     {
+        postId:3,
         userId:9,
-        postImg:"https://picsum.photos/200/377",
+        postImg:"https://picsum.photos/203",
         description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
     },
     {
+        postId:4,
         userId:10,
-        postImg:"https://picsum.photos/200/379",
+        postImg:"https://picsum.photos/204",
         description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
     }
 ]

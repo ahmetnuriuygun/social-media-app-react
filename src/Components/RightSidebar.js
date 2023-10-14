@@ -1,7 +1,14 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCakeCandles} from "@fortawesome/free-solid-svg-icons";
+import {forEach} from "react-bootstrap/ElementChildren";
+import * as PropTypes from "prop-types";
 
-export function RightSidebar(){
+export function RightSidebar(props){
+    const {users,activeUser} = props;
+
+
+    users.filter(u=>activeUser.friends.includes(u.userId))
+
    return(
        <div className="row-offcanvas row-offcanvas-right">
            <div id="sidebar-right" className="sidebar-offcanvas">
@@ -11,24 +18,23 @@ export function RightSidebar(){
                </div>
                <hr/>
                <div>
-                   <h3>Friends</h3>
+                   <h3 className='ms-4'>Friends</h3>
                    <ul>
-                       <li> <img src="/images/friends2.jpeg"/>Stefan Zweig</li>
-                       <li> <img src="/images/friends3.jpeg"/>Franz Kafka</li>
-                       <li> <img src="/images/friends4.jpeg"/>Thomas More</li>
-                       <li> <img src="/images/friends5.jpeg"/>Tolstoy</li>
-                       <li> <img src="/images/friends6.jpeg"/>Erich Fromm</li>
-                       <li> <img src="/images/friends2.jpeg"/>Sheakspeare</li>
-                       <li> <img src="/images/friends4.jpeg"/>Immanuel Kant</li>
-                       <li> <img src="/images/friends5.jpeg"/>Freud</li>
-                       <li> <img src="/images/friends6.jpeg"/>Hegel</li>
-                       <li> <img src="/images/friends2.jpeg"/>Albert Camus</li>
-                       <li> <img src="/images/friends2.jpeg"/>Sartre</li>
-                       <li> <img src="/images/friends3.jpeg"/>Gogol</li>
-                       <li> <img src="/images/friends4.jpeg"/>Spinoza</li>
+                       {users.filter(u=>activeUser.friends.includes(u.userId)).map(f=>
+                           <FriendsList key={f.userId} friend={f}/>
+                       )}
                    </ul>
                </div>
            </div>
        </div>
    )
 }
+
+function FriendsList(props) {
+    const {friend} = props;
+    return (
+        <li><img src={`images/${friend.profileImg}`}/>{friend.firstName} {friend.lastName}</li>
+    );
+}
+
+FriendsList.propTypes = {friend: PropTypes.any};

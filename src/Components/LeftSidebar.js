@@ -10,13 +10,13 @@ export function LeftSidebar(props) {
         <div className="row-offcanvas row-offcanvas-left">
             <div id="sidebar-left" className="sidebar-offcanvas">
                 <div className="d-flex flex-col justify-content-center align-items-center">
-                    {user.map(u=>
+
                         <div>
-                            <img src={`images/${u.profileImg}`} alt="img" className=" justify-content-center" />
-                            <h3 className="text-center">{u.firstName} {u.lastName}</h3>
-                            <p className="text-center">{u.city},{u.country}</p>
+                            <img src={`images/${user.profileImg}`} alt="img" className=" justify-content-center" />
+                            <h3 className="text-center">{user.firstName} {user.lastName}</h3>
+                            <p className="text-center">{user.city},{user.country}</p>
                         </div>
-                    )}
+
 
                 </div>
 

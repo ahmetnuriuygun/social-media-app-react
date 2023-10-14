@@ -3,20 +3,21 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faComment, faHeart, faShare} from "@fortawesome/free-solid-svg-icons";
 
 
-export function PostCard(props) {
+export function Posts(props) {
     const {posts, users} = props;
     const post_user = postUsers(posts, users)
 
 
     return (
         <div>
-            {post_user.map(p=><MyCard key={p.id} post={p}/>)}
+            {post_user.map(p => <PostCard key={p.postId} post={p}/>)}
         </div>
-            )
+
+    )
 }
 
-function MyCard(props){
-   const {post} = props;
+function PostCard(props) {
+    const {post} = props;
     return (
         <Card className='post-card'>
             <Card.Body>
@@ -29,10 +30,16 @@ function MyCard(props){
                 </Card.Text>
                 <Card.Img style={{height: "500px"}} src={`${post.postImg}`}/>
             </Card.Body>
+            <Card.Footer>
+                <div className='d-flex justify-content-around '>
+                    <p><FontAwesomeIcon icon={faHeart}/> Like</p>
+                    <p><FontAwesomeIcon icon={faComment}/>Comment</p>
+                    <p><FontAwesomeIcon icon={faShare}/>Share</p>
+                </div>
+            </Card.Footer>
         </Card>
     )
 }
-
 
 
 export function postUsers(posts, users) {
