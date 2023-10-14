@@ -5,25 +5,24 @@ import {RandomPictures} from "../Components/RandomPictures";
 import {PostInput} from "../Components/PostInput";
 import {PostCard} from "../Components/PostCard";
 
-export function Home() {
+export function Home(props) {
+    const {activeUser,users,posts} = props;
     return (
         <>
             <NavigationBar/>
             <div className="container">
                 <div className="row">
                     <div className="col-lg-3">
-                        <LeftSidebar/>
+                        <LeftSidebar user={activeUser}/>
                     </div>
                     <div className="main col-lg-6">
                         <RandomPictures/>
-                        <PostInput/>
-                        <PostCard/>
-                        <PostCard/>
-                        <PostCard/>
-                        <PostCard/>
+                        <PostInput user={activeUser}/>
+                        <PostCard posts={posts} users={users}/>
+
                     </div>
                     <div className="col-lg-3">
-                        <RightSidebar/>
+                        <RightSidebar users={users}/>
                     </div>
                 </div>
             </div>

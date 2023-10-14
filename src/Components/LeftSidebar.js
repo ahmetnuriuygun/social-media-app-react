@@ -1,18 +1,23 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCirclePlay, faNewspaper, faPuzzlePiece, faStore} from "@fortawesome/free-solid-svg-icons";
 
-export function LeftSidebar() {
+export function LeftSidebar(props) {
+    const {user} = props;
+
     return (
 
 
         <div className="row-offcanvas row-offcanvas-left">
             <div id="sidebar-left" className="sidebar-offcanvas">
                 <div className="d-flex flex-col justify-content-center align-items-center">
-                           <div>
-                               <img src="/images/profile.jpg" alt="img" className=" justify-content-center" />
-                               <h3 className="text-center">Fjodor Dostojevski</h3>
-                               <p className="text-center">Moscow,Rusland</p>
-                           </div>
+                    {user.map(u=>
+                        <div>
+                            <img src={`images/${u.profileImg}`} alt="img" className=" justify-content-center" />
+                            <h3 className="text-center">{u.firstName} {u.lastName}</h3>
+                            <p className="text-center">{u.city},{u.country}</p>
+                        </div>
+                    )}
+
                 </div>
 
                     <hr/>
