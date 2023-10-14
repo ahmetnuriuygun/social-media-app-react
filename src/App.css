@@ -54,7 +54,7 @@ body,html,.row-offcanvas {
     margin-left: auto;
     margin-right: auto;
     margin-top: 3em;
-    width: 50%;
+    width: 30%;
     border-radius: 50%;
 
 }
@@ -141,15 +141,31 @@ body,html,.row-offcanvas {
 }
 .input-box img{
     display: inline;
-    width: 80%;
     height:100%;
-    border-radius: 40%;
+
+    width: 80%;
+    border-radius: 50%;
 }
 .input-box input{
     margin-left: 10px;
-
     width: 600px;
     height: 50px;
     background:#EFF2F5 ;
     border: none;
+}
+
+.post-card{
+    width: inherit;
+    height: fit-content;
+    border-radius: 10px;
+    padding: 0.5em;
+    background: white;
+    margin-bottom: 1.5em;
+}
+.post-card .profile-img-card{
+    display: inline;
+    width: 10%;
+
+
+
 }

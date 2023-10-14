@@ -9,7 +9,7 @@ export function LeftSidebar() {
             <div id="sidebar-left" className="sidebar-offcanvas">
                 <div className="d-flex flex-col justify-content-center align-items-center">
                            <div>
-                               <img src="/images/profile.jpg" alt="img" className="rounded-circle justify-content-center" />
+                               <img src="/images/profile.jpg" alt="img" className=" justify-content-center" />
                                <h3 className="text-center">Fjodor Dostojevski</h3>
                                <p className="text-center">Moscow,Rusland</p>
                            </div>

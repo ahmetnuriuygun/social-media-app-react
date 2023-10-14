@@ -3,6 +3,7 @@ import {LeftSidebar} from "../Components/LeftSidebar";
 import {RightSidebar} from "../Components/RightSidebar";
 import {RandomPictures} from "../Components/RandomPictures";
 import {PostInput} from "../Components/PostInput";
+import {PostCard} from "../Components/PostCard";
 
 export function Home() {
     return (
@@ -16,6 +17,10 @@ export function Home() {
                     <div className="main col-lg-6">
                         <RandomPictures/>
                         <PostInput/>
+                        <PostCard/>
+                        <PostCard/>
+                        <PostCard/>
+                        <PostCard/>
                     </div>
                     <div className="col-lg-3">
                         <RightSidebar/>

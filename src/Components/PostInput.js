@@ -9,10 +9,6 @@ export function PostInput(){
                 <Form.Control type="text" placeholder="What are you thinking,Dostoyevski? " />
             </Form.Group>
         </Form>
-            // <div className="input-box">
-            //     <img src="/images/profile.jpg"/>
-            //     <Input type="text" placeholder="What are you thinking,Dostoyevski? "/>
-            // </div>
 
         )
 
