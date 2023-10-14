@@ -1,66 +1,42 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {Carousel} from "react-bootstrap";
 
 
-
-export function RandomPictures() {
-    return(
-        <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
-            <div className="carousel-inner">
-                <div className="carousel-item active">
-                    <div className="cards-wrapper">
-                        <div className="card">
-                            <img src="https://picsum.photos/200/350" className="card-img-top" alt="..."/>
-                        </div>
-                        <div className="card d-none d-md-block">
-                            <img src="https://picsum.photos/200/360" className="card-img-top"  alt="..."/>
-                        </div>
-                        <div className="card d-none d-md-block">
-                            <img src="https://picsum.photos/200/370" className="card-img-top" alt="..."/>
-                        </div>
-                    </div>
+function StoryCards() {
+    return (
+        <div className="container">
+            <div className="row mt-3">
+                <div className="story-cards col-3 d-none d-md-block">
+                    <img src="https://picsum.photos/200/350" alt="..."/>
                 </div>
-                <div className="carousel-item">
-                    <div className="cards-wrapper">
-                        <div className="card">
-                            <img src="https://picsum.photos/200/300" className="card-img-top" alt="..."/>
-
-                        </div>
-                        <div className="card d-none d-md-block">
-                            <img src="https://picsum.photos/200/300" className="card-img-top" alt="..."/>
-
-                        </div>
-                        <div className="card d-none d-md-block">
-                            <img src="https://picsum.photos/200/300" className="card-img-top" alt="..."/>
-
-                        </div>
-                    </div>
+                <div className="story-cards col-3 d-none d-md-block">
+                    <img src="https://picsum.photos/200/360" alt="..."/>
                 </div>
-                <div className="carousel-item">
-                    <div className="cards-wrapper">
-                        <div className="card">
-                            <img src="https://picsum.photos/200/300" className="card-img-top " alt="..."/>
-
-                        </div>
-                        <div className="card d-none d-md-block">
-                            <img src="https://picsum.photos/200/300" className="card-img-top" alt="..."/>
-
-                        </div>
-                        <div className="card d-none d-md-block">
-                            <img src="https://picsum.photos/200/300" className="card-img-top" alt="..."/>
-
-                        </div>
-                    </div>
+                <div className="story-cards col-3 d-none d-md-block">
+                    <img src="https://picsum.photos/200/370" alt="..."/>
+                </div>
+                <div className="story-cards col-3 d-none d-md-block">
+                    <img src="https://picsum.photos/200/380" alt="..."/>
                 </div>
             </div>
-            <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span className="sr-only">Previous</span>
-            </a>
-            <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                <span className="sr-only">Next</span>
-            </a>
         </div>
+
+    );
+}
+
+export function RandomPictures() {
+    return (
+        <Carousel>
+            <Carousel.Item>
+                <StoryCards/>
+            </Carousel.Item>
+            <Carousel.Item>
+                <StoryCards/>
+            </Carousel.Item>
+            <Carousel.Item>
+                <StoryCards/>
+            </Carousel.Item>
+        </Carousel>
 
     )
 }

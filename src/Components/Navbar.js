@@ -28,7 +28,7 @@ export function NavigationBar(){
                     <li className=" d-md-none d-lg-block">
                         <div className="input-group search">
                             <div className="form-outline">
-                                <input type="search" id="form1" className="form-control" placeholder="Search friends"/>
+                                <input type="search" id="search-input" className="form-control" placeholder="Search friends"/>
                             </div>
                             <button type="button" className="btn btn-dark">
                                 <FontAwesomeIcon icon={faMagnifyingGlass} />

@@ -10,8 +10,8 @@ export function LeftSidebar() {
                 <div className="d-flex flex-col justify-content-center align-items-center">
                            <div>
                                <img src="/images/profile.jpg" alt="img" className="rounded-circle justify-content-center" />
-                               <h3 className="text-center">Debby Williams</h3>
-                               <p className="text-center">New York, USA</p>
+                               <h3 className="text-center">Fjodor Dostojevski</h3>
+                               <p className="text-center">Moscow,Rusland</p>
                            </div>
                 </div>
 
