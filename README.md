@@ -10,6 +10,7 @@ It is a task that we need to make it at the of the Dynamic WebApps lesson.
 
 ### Project Skeleton
 
+```
 006 - FireBlog App (folder)
 |
 |----readme.md         # Given to the students (Definition of the project)
@@ -49,6 +50,7 @@ SOLUTION
 ├── .env
 ├── package.json
 └── yarn.lock
+```
 
 ### Expected Outcome
 
