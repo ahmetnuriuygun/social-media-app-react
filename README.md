@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+# Dynamic WebApps Project 01(Poke- Social Media Application)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+Project aims to create a Social Media App . User can share post, like it or give a comment. In the other hand he can also change his profile informations and images. He can add friends and write them in a chatbox. He can be premium member and also sell and buy somethings on market place.
 
-In the project directory, you can run:
+### Problem Statement
 
-### `npm start`
+It is a task that we need to make it at the of the Dynamic WebApps lesson.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Project Skeleton
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+006 - FireBlog App (folder)
+|
+|----readme.md         # Given to the students (Definition of the project)
+SOLUTION
+├── public
+│     └── index.html
+├── src
+│    ├── components
+│    │       ├── LefSidebar
+│    │       ├── Navbar
+│    │       └── PostInput
+│    │       └── Posts
+│    │       └── RandomPicture
+│    │       └── RightSidebar
+│    │       └── ....
+│    │ 
+│    │       
+│    │       
+│    ├── helpers
+│    │       ├── firebase.js
+│    │       
+│    ├── pages
+│    │       ├── Pages.js
+│    │       ├── Home.js
+│    │       ├── Login.js
+│    │       ├── Register.js
+│    │       ├── Marketplace.js
+│    │       ├── Message.js
+│    │       ├── Profile.js
+│    │       └── News.js
+│    ├── assets.js
+│    │       └── [images]
+│    ├── App.js
+│    ├── App.css
+│    ├── index.js
+│    └── index.css
+├── .env
+├── package.json
+└── yarn.lock
 
-### `npm test`
+### Expected Outcome
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+https://www.facebook.com/
 
-### `npm run build`
+### Objective
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Build a Social Media Application with using Firebase and React.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### At the end of the project, following topics are to be covered 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- HTML
 
-### `npm run eject`
+- CSS
+  
+- React Bootstrap
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- JS
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- ReactJS
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### At the end of the project, students will be able to;
 
-## Learn More
+- improve coding skills within HTML & CSS & JS & ReactJS.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- use git commands (push, pull, commit, add etc.) and Github as Version Control System.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Steps to Solution
 
-### Code Splitting
+- Step 1 : Create React App using `npx create-react-app fireblog-app`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Step 2 : Use Firebase Auth for authentication and Firebase Realtime Database for CRUD operations.
 
-### Analyzing the Bundle Size
+- Step 3 : You can use css frameworks like Bootstrap.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Step 4 : Add project gif to your project and README.md file.
 
-### Making a Progressive Web App
+## My Solution
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+https://poke-cst9.onrender.com/
