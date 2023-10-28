@@ -10,6 +10,7 @@ import {
 import { AuthContext } from "../context/AuthContext";
 import {LoginRegister} from "../Pages/LoginRegister";
 import {Home} from "../Pages/Home";
+import {POSTS_DATA, USER_DATA} from "../data/data";
 
 const AppRouter = () => {
     const { currentUser } = useContext(AuthContext);
@@ -21,7 +22,7 @@ const AppRouter = () => {
             <Routes>
                 <Route path="/" element={<LoginRegister />} />
                 <Route path="/home" element={<PrivateRouter />}>
-                    <Route path="/home" element={<Home />} />
+                    <Route path="/home" element={<Home posts={POSTS_DATA} users={USER_DATA} />} />
                 </Route>
             </Routes>
         </BrowserRouter>

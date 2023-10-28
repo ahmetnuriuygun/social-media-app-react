@@ -13,7 +13,7 @@ export function NavigationBar(){
 
 
         <nav className="navbar navbar-light navbar-expand-sm bg-faded justify-content-center">
-            <a href="/" className="navbar-brand d-flex w-50 mr-auto header-logo text-primary">POKE<FontAwesomeIcon icon={faCat} bounce /></a>
+            <a href="/" className="navbar-brand d-flex w-50 mr-auto header-logo text-primary">FRIEND SPACE<FontAwesomeIcon icon={faCat} bounce /></a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
                 <span className="navbar-toggler-icon"></span>
             </button>

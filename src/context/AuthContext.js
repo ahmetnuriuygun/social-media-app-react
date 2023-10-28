@@ -1,10 +1,10 @@
 import { createContext, useEffect, useState } from "react";
-import { userObserver } from "../auth/firebase";
+import { userObserver } from "../auth/functions";
 
 export const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
-    const [currentUser, setCurrentUser] = useState(false);
+    const [currentUser, setCurrentUser] = useState();
 
     useEffect(() => {
         // setCurrentUser(JSON.parse(sessionStorage.getItem("user")));

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Col, Form, Row} from "react-bootstrap";
-import {createUser} from "../auth/firebase";
+import {addUser, createUser, signIn} from "../auth/functions.js";
 import {useNavigate} from "react-router-dom";
 
 
@@ -9,8 +9,12 @@ function LogInRegisterNavbar() {
         email: "",
         password: "",
     })
+    const{email,password} = info;
+    const navigate = useNavigate();
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        signIn(email,password,navigate)
     }
     const handleChange = (e) => {
         setInfo({...info, [e.target.name]: e.target.value})
@@ -19,7 +23,7 @@ function LogInRegisterNavbar() {
         <nav className="navbar login-navbar navbar-expand-sm  justify-content-center">
 
             <div className='login-header-div'>
-                <a href="/" className="navbar-brand d-flex login-header text-white">POKE</a>
+                <a href="/" className="navbar-brand d-flex login-header text-white">FRIEND SPACE</a>
             </div>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
                 <span className="navbar-toggler-icon"></span>
@@ -45,7 +49,7 @@ function LogInRegisterNavbar() {
                                 </Form.Text>
                             </Form.Group>
                             <Form.Group>
-                                <input className="btn btn-primary m-4" type="submit" value="Submit"/>
+                                <input className="btn btn-primary m-4" type="submit" value="Log In"/>
                             </Form.Group>
 
                         </Form>
@@ -59,7 +63,7 @@ function LogInRegisterNavbar() {
 function LoginRegisterInfo() {
     return (
         <div className="login-main-info m-5 h-100">
-            <h3 className="login-text-info">Poke helps you connect and share <br/>
+            <h3 className="login-text-info">Friend Space helps you connect and share <br/>
                 <span>with the people in your life</span></h3>
             <img className="mt-3 border-none" src={`images/facebook-login-main.png`}/>
         </div>
@@ -77,13 +81,13 @@ function LoginRegisterForm() {
         birthDate: "",
         gender: "",
     })
+
     const navigate = useNavigate();
     const {firstName, lastName, email, password, birthDate, gender} = info;
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        createUser(email,password,navigate);
-
+        createUser(firstName,lastName,email,password,birthDate,gender,navigate);
     }
 
     const handleChange = (e) => {
