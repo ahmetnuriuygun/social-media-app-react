@@ -12,17 +12,18 @@ export function Home(props) {
             <NavigationBar/>
             <div className="container">
                 <div className="row">
-                    <div className="d-none d-xl-block col-xl-3">
-                        <LeftSidebar user={activeUser}/>
-                    </div>
-                    <div className="main col-sm-12 col-lg-10  col-xl-6 ">
-                        <RandomPictures/>
-                        <PostInput user={activeUser}/>
-                        <Posts posts={posts} users={users}/>
-                    </div>
-                    <div className="d-none d-lg-block col-lg-1 col-xl-3">
-                        <RightSidebar users={users} activeUser={activeUser}/>
-                    </div>
+                    <p>yonelndirildi</p>
+                    {/*<div className="d-none d-xl-block col-xl-3">*/}
+                    {/*    <LeftSidebar user={activeUser}/>*/}
+                    {/*</div>*/}
+                    {/*<div className="main col-sm-12 col-lg-10  col-xl-6 ">*/}
+                    {/*    <RandomPictures/>*/}
+                    {/*    <PostInput user={activeUser}/>*/}
+                    {/*    <Posts posts={posts} users={users}/>*/}
+                    {/*</div>*/}
+                    {/*<div className="d-none d-lg-block col-lg-1 col-xl-3">*/}
+                    {/*    <RightSidebar users={users} activeUser={activeUser}/>*/}
+                    {/*</div>*/}
                 </div>
             </div>
 

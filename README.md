@@ -35,7 +35,7 @@ SOLUTION
 │    ├── pages
 │    │       ├── Pages.js
 │    │       ├── Home.js
-│    │       ├── Login.js
+│    │       ├── LoginRegister.js
 │    │       ├── Register.js
 │    │       ├── Marketplace.js
 │    │       ├── Message.js
