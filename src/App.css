@@ -169,3 +169,32 @@ body,html,.row-offcanvas {
 
 
 }
+.login-navbar{
+    background: #3A5998;
+}
+.login-header-div{
+    position: absolute;
+    left: 20%;
+    top: 50%;
+    transform: translate(0, -50%);
+    padding: 10px;
+}
+.login-header{
+   font-size: xx-large;
+   font-weight: bolder;
+   padding: 10px;
+    letter-spacing: 13px;
+
+}
+
+.login-main{
+    height: 100vh;
+}
+
+
+.login-main-info h3{
+    color:#3A5998;
+}
+.login-main-info img{
+    height: 35%;
+}
