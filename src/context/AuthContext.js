@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { userObserver } from "../auth/functions";
+import { userObserver } from "../helpers/functions";
 
 export const AuthContext = createContext();
 

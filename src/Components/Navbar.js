@@ -1,14 +1,15 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faBell, faCat, faEnvelope, faGear, faHouse, faMagnifyingGlass, faUser} from "@fortawesome/free-solid-svg-icons";
-import {Button, Dropdown, Form} from "react-bootstrap";
 import React from "react";
+import {Dropdown, Nav, NavDropdown} from "react-bootstrap";
+import {logOut} from "../helpers/functions";
+import {useNavigate} from "react-router-dom";
 
 
 export function NavigationBar(){
+    const navigate = useNavigate();
+
     return (
 
 
@@ -20,7 +21,7 @@ export function NavigationBar(){
             <div className="navbar-collapse collapse w-100" id="collapsingNavbar3">
                 <ul className="navbar-nav w-100 justify-content-center">
                     <li className="nav-item active">
-                        <a className="nav-link" href="#"><FontAwesomeIcon icon={faHouse} /></a>
+                        <a className="nav-link" onClick={()=>navigate("/home")}><FontAwesomeIcon icon={faHouse} /></a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="//codeply.com"><FontAwesomeIcon icon={faEnvelope} /></a>
@@ -41,13 +42,19 @@ export function NavigationBar(){
                         <a href="#"><FontAwesomeIcon icon={faUser} /></a>
                     </li>
                     <li className="nav-item">
-                        <a href="#"><FontAwesomeIcon icon={faGear} /></a>
+                        <NavDropdown title={<FontAwesomeIcon icon={faGear} />}  id="nav-dropdown">
+                            <NavDropdown.Item onClick={()=>navigate("/settings")} eventKey="4.1">Settings</NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item onClick={()=>logOut(navigate)} eventKey="4.4">Logout</NavDropdown.Item>
+                        </NavDropdown>
                     </li>
+
                     <li className="nav-item">
                         <a href="#"><FontAwesomeIcon icon={faBell} /></a>
                     </li>
                 </ul>
             </div>
+
         </nav>
 
     );

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Col, Form, Row} from "react-bootstrap";
-import {addUser, createUser, signIn} from "../auth/functions.js";
+import {createUser, signIn} from "../helpers/functions.js";
 import {useNavigate} from "react-router-dom";
 
 

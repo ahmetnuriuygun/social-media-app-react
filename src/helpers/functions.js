@@ -1,7 +1,7 @@
 import {createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut} from "firebase/auth";
 import auth, {firebase, firestoreDB} from "./firebase";
 
-import {addDoc, collection, orderBy, query} from "firebase/firestore";
+import {addDoc, collection } from "firebase/firestore";
 
 export const userConverter = {
     toFirestore: function (dataInApp) {
@@ -12,6 +12,14 @@ export const userConverter = {
             password: dataInApp.password,
             birthDate: dataInApp.birthDate,
             gender: dataInApp.gender,
+            friends:[],
+            postsAmount:0,
+            followers:0,
+            following:0,
+            isPremium:false,
+            profileImg:"",
+            city:"",
+            country:"",
         };
     },
     fromFirestore: function (snapshot, options) {
@@ -48,10 +56,10 @@ export const signIn = async(email,password,navigate) =>{
     }
 }
 
-export const logOut = () =>{
+export const logOut = (navigate) =>{
     signOut(auth)
         .then(()=>{
-
+            navigate("/");
         })
         .catch((error)=>{
             alert(error.message)
@@ -77,6 +85,14 @@ export function addUser(firstName,lastName,email,password,birthDate,gender){
         password: password,
         birthDate: birthDate,
         gender: gender,
+        friends:[],
+        postsAmount:0,
+        followers:0,
+        following:0,
+        isPremium:false,
+        profileImg:"",
+        city:"",
+        country:"",
     }
     const collectionRef = collection(firestoreDB, 'Users').withConverter(userConverter)
 

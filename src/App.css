@@ -1,3 +1,5 @@
+
+
 .App{
     background:#EFF2F5 ;
 }
@@ -198,3 +200,24 @@ body,html,.row-offcanvas {
 .login-main-info img{
     height: 35%;
 }
+.btn-not-completed{
+    background-image: linear-gradient(to right, #688bcc, #688bcc, #cbdadc, #dbdccc);
+    color: black;
+    border: none;
+    margin: 0;
+    position: relative;
+    top: 50%;
+    left: 20%;
+    /*box-shadow: 0 4px 15px 0 rgba(83, 176, 57, 0.75);*/
+}
+.btn-discover{
+    background-image: linear-gradient(to right, #688bcc, #688bcc, #cbdadc, #dbdccc);
+    color: black;
+    border: none;
+    margin: 0;
+    position: relative;
+    /*top: 50%;*/
+    left: 20%;
+    /*box-shadow: 0 4px 15px 0 rgba(83, 176, 57, 0.75);*/
+}
+

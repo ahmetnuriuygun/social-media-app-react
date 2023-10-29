@@ -1,13 +1,4 @@
-export const ACTIVE_USER=
-    {
-        userId: 1,
-        firstName: "Fjodor",
-        lastName: "Dostojevski",
-        profileImg: "profile.jpg",
-        country:"Russia",
-        city:"Moscow",
-        friends:[2,3,4,5,6,7,8,9,10,11,12,13,14]
-    }
+
 
 
 

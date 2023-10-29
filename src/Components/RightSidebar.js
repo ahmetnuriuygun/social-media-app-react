@@ -4,10 +4,9 @@ import {forEach} from "react-bootstrap/ElementChildren";
 import * as PropTypes from "prop-types";
 
 export function RightSidebar(props){
-    const {users,currentUser} = props;
+    const {users} = props;
 
 
-    users.filter(u=>currentUser.friends.includes(u.userId))
 
    return(
        <div className="row-offcanvas row-offcanvas-right">
@@ -20,7 +19,11 @@ export function RightSidebar(props){
                <div>
                    <h3 className='ms-4'>Friends</h3>
                    <ul>
-                       {users.filter(u=>currentUser.friends.includes(u.userId)).map(f=>
+                       {/*{users.filter(u=>currentUser?.friends.includes(u.userId)).map(f=>*/}
+                       {/*    <FriendsList key={f.userId} friend={f}/>*/}
+                       {/*)}*/}
+
+                       {users.map(f=>
                            <FriendsList key={f.userId} friend={f}/>
                        )}
                    </ul>
