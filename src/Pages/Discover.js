@@ -1,17 +1,26 @@
 import {NavigationBar} from "../Components/Navbar";
 import {LeftSidebar} from "../Components/LeftSidebar";
 
-import React, {useContext, useMemo} from "react";
+import React, {useContext, useMemo, useState} from "react";
 import {Button, Card, Col, Container, Row} from "react-bootstrap";
-import {collection, orderBy, query} from "firebase/firestore";
+import {collection, orderBy, query, updateDoc} from "firebase/firestore";
 import {firestoreDB} from "../helpers/firebase";
 import {userConverter} from "../helpers/functions";
 import {useCollectionData} from "react-firebase-hooks/firestore";
-import {CurrentUserContext} from "../context/CurrentUserContext";
+import  {CurrentUserContext} from "../context/CurrentUserContext";
 import {forEach} from "react-bootstrap/ElementChildren";
 
 function FriendSuggestionCard(props) {
     const {user} = props;
+    const currentUser = useContext(CurrentUserContext);
+
+    const addFriend = () =>{
+        currentUser.map(person => updateDoc(person.ref, {friendsAmount: person.friendsAmount + 1}))
+
+        console.log(user.id)
+    }
+
+
     return (
         <Col md={4}  >
             <Card style={{ width: '10rem' , height:"22rem" }} className='mt-3'>
@@ -21,7 +30,7 @@ function FriendSuggestionCard(props) {
                     <Card.Text className='text-muted'>
                         5 common friends
                     </Card.Text>
-                    <Button variant="primary">Add friend</Button>
+                    <Button variant="primary" onClick={addFriend} >Add friend</Button>
                 </Card.Body>
             </Card>
         </Col>
