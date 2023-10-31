@@ -45,17 +45,14 @@ export function LeftSidebar() {
                         <p>Posts</p>
                     </div>
                     <div className="m-3">
-                        <h3 className="text-center">{c.followers}</h3>
+                        <h3 className="text-center">{c.friendsAmount}</h3>
                         <p>Followers</p>
                     </div>
-                    <div className="m-3">
-                        <h3 className="text-center">{c.following}</h3>
-                        <p>Following</p>
-                    </div>
+
                 </div>
 
                         {
-                            c.followers<5 || c.following<5 ?  <Button className='btn-discover justify-content-center text-center mr-auto' onClick={()=>navigate("/discover")} >Discover your friends</Button> : ""
+                            c.friends ?  <Button className='btn-discover justify-content-center text-center mr-auto' onClick={()=>navigate("/discover")} >Discover your friends</Button> : ""
 
                         }
                     </>

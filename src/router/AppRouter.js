@@ -27,10 +27,10 @@ const AppRouter = () => {
                     <Route path="/home" element={<Home posts={POSTS_DATA} users={USER_DATA} />} />
                 </Route>
                 <Route path="/settings" element={<PrivateRouter />}>
-                    <Route path="/settings" element={<Settings users={USER_DATA}/>}/>
+                    <Route path="/settings" element={<Settings />}/>
                 </Route>
                 <Route path="/discover" element={<PrivateRouter />}>
-                    <Route path="/discover" element={<Discover users={USER_DATA}/>}/>
+                    <Route path="/discover" element={<Discover />}/>
                 </Route>
 
             </Routes>
