@@ -1,8 +1,11 @@
 import {NavigationBar} from "../Components/Navbar";
 import {LeftSidebar} from "../Components/LeftSidebar";
-import {Tab, Tabs} from "react-bootstrap";
-import {RightSidebar} from "../Components/RightSidebar";
+
 import React from "react";
+
+function FriendsSuggestions() {
+    return null;
+}
 
 export function Discover(){
     return(
@@ -15,6 +18,7 @@ export function Discover(){
                         <LeftSidebar/>
                     </div>
                     <div className="main col-sm-12 col-lg-10  col-xl-6 ">
+                        <FriendsSuggestions/>
                        </div>
                     <div className="d-none d-lg-block col-lg-1 col-xl-3">
                         {/*<RightSidebar />*/}

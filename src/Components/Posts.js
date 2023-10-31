@@ -1,6 +1,8 @@
 import {Button, Card} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faComment, faHeart, faShare} from "@fortawesome/free-solid-svg-icons";
+import {useContext} from "react";
+import {ThemeContext} from "../context/ThemeContext";
 
 
 export function Posts(props) {
@@ -17,9 +19,10 @@ export function Posts(props) {
 }
 
 function PostCard(props) {
+    const [{theme,isDark},toggleTheme] = useContext(ThemeContext);
     const {post} = props;
     return (
-        <Card className='post-card'>
+        <Card className='post-card'  style={{background:theme.backgroundColor,color:theme.color}}>
             <Card.Body>
                 <Card.Title>
                     <img className='profile-img-card rounded-circle' src={`images/${post.profileImg}`}/> <span

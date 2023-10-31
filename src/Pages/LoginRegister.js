@@ -1,10 +1,13 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {Col, Form, Row} from "react-bootstrap";
 import {createUser, signIn} from "../helpers/functions.js";
 import {useNavigate} from "react-router-dom";
+import {ThemeContext} from "../context/ThemeContext";
 
 
 function LogInRegisterNavbar() {
+    const [{theme,isDark},toggleTheme] = useContext(ThemeContext);
+
     const [info, setInfo] = useState({
         email: "",
         password: "",
@@ -20,7 +23,7 @@ function LogInRegisterNavbar() {
         setInfo({...info, [e.target.name]: e.target.value})
     }
     return (
-        <nav className="navbar login-navbar navbar-expand-sm  justify-content-center">
+        <nav className="navbar login-navbar navbar-expand-sm  justify-content-center" >
 
             <div className='login-header-div'>
                 <a href="/" className="navbar-brand d-flex login-header text-white">FRIEND SPACE</a>

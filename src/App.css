@@ -3,7 +3,14 @@
 .App{
     background:#EFF2F5 ;
 }
-
+.dark {
+    background-color: #333;
+    color: #fff;
+}
+.light {
+    background-color: #fff;
+    color: #333;
+}
 .navbar{
     background: white;
     padding:1em;
@@ -38,7 +45,7 @@ body,html,.row-offcanvas {
 #sidebar-left {
 
     box-shadow: 1px 1px 5px rgba(0,0,0, 0.3);
-    background:#EFF2F5 ;
+    /*background:#EFF2F5 ;*/
     float: left;
     position:fixed;
     overflow-y:auto;
@@ -220,4 +227,14 @@ body,html,.row-offcanvas {
     left: 20%;
     /*box-shadow: 0 4px 15px 0 rgba(83, 176, 57, 0.75);*/
 }
-
+.premium-cards:hover{
+    width: 30rem;
+    background: #b4adad;
+}
+.img-update-div{
+    display: flex;
+    align-items: center;
+}
+.img-update-div img{
+    margin: auto;
+}

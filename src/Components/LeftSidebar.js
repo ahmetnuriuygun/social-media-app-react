@@ -4,9 +4,12 @@ import {useContext} from "react";
 import {CurrentUserContext} from "../context/CurrentUserContext";
 import {Button} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
+import {ThemeContext} from "../context/ThemeContext";
 
 export function LeftSidebar() {
     const currentUser = useContext(CurrentUserContext)
+    const [{theme,isDark},toggleTheme] = useContext(ThemeContext);
+
     const navigate = useNavigate();
     console.log(currentUser)
 
@@ -14,7 +17,7 @@ export function LeftSidebar() {
 
 
         <div className="row-offcanvas row-offcanvas-left">
-            <div id="sidebar-left" className="sidebar-offcanvas">
+            <div id="sidebar-left" className="sidebar-offcanvas" style={{background:theme.backgroundColor,color:theme.color}}>
                 {currentUser?.map((c) =>
                     <>
                     <div className="d-flex flex-col justify-content-center align-items-center">
@@ -52,7 +55,7 @@ export function LeftSidebar() {
                 </div>
 
                         {
-                            c.followers<5 || c.following<5 ?  <Button className='btn-discover justify-content-center text-center mr-auto' >Discover your friends</Button> : ""
+                            c.followers<5 || c.following<5 ?  <Button className='btn-discover justify-content-center text-center mr-auto' onClick={()=>navigate("/discover")} >Discover your friends</Button> : ""
 
                         }
                     </>

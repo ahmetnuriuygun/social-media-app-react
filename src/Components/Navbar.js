@@ -1,19 +1,21 @@
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faBell, faCat, faEnvelope, faGear, faHouse, faMagnifyingGlass, faUser} from "@fortawesome/free-solid-svg-icons";
-import React from "react";
+import React, {useContext} from "react";
 import {Dropdown, Nav, NavDropdown} from "react-bootstrap";
 import {logOut} from "../helpers/functions";
 import {useNavigate} from "react-router-dom";
+import {ThemeContext} from "../context/ThemeContext";
 
 
 export function NavigationBar(){
     const navigate = useNavigate();
+    const [{theme,isDark},toggleTheme] = useContext(ThemeContext);
 
     return (
 
 
-        <nav className="navbar navbar-light navbar-expand-sm bg-faded justify-content-center">
+        <nav className="navbar navbar-light navbar-expand-sm bg-faded justify-content-center" style={{background:theme.backgroundColor,color:theme.color}}>
             <a href="/" className="navbar-brand d-flex w-50 mr-auto header-logo text-primary">FRIEND SPACE<FontAwesomeIcon icon={faCat} bounce /></a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
                 <span className="navbar-toggler-icon"></span>

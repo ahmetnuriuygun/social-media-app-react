@@ -1,7 +1,7 @@
 import {createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut} from "firebase/auth";
 import auth, {firebase, firestoreDB} from "./firebase";
 
-import {addDoc, collection } from "firebase/firestore";
+import {addDoc, collection,deleteDoc } from "firebase/firestore";
 
 export const userConverter = {
     toFirestore: function (dataInApp) {
@@ -103,4 +103,6 @@ export function addUser(firstName,lastName,email,password,birthDate,gender){
         console.log("ERROR add dummy person NOT done")
     }
 }
+
+
 

@@ -12,6 +12,7 @@ import {LoginRegister} from "../Pages/LoginRegister";
 import {Home} from "../Pages/Home";
 import {POSTS_DATA, USER_DATA} from "../data/data";
 import {Settings} from "../Pages/Settings";
+import {Discover} from "../Pages/Discover";
 
 const AppRouter = () => {
     const { currentUser } = useContext(AuthContext);
@@ -29,8 +30,9 @@ const AppRouter = () => {
                     <Route path="/settings" element={<Settings users={USER_DATA}/>}/>
                 </Route>
                 <Route path="/discover" element={<PrivateRouter />}>
-                    <Route path="/discover" element={<Settings users={USER_DATA}/>}/>
+                    <Route path="/discover" element={<Discover users={USER_DATA}/>}/>
                 </Route>
+
             </Routes>
         </BrowserRouter>
     );
