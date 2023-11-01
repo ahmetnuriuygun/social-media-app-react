@@ -5,6 +5,7 @@ import CurrentUserContextProvider from "./context/CurrentUserContext";
 import React, {useContext} from "react";
 import {ThemeContext} from "./context/ThemeContext";
 import UsersProvider from "./context/UsersContext";
+import PostsProvider from "./context/PostsContext";
 
 
 function App() {
@@ -14,9 +15,11 @@ function App() {
     return (
             <div className="App" style={{background:theme.backgroundColor,color:theme.color}}>
                     <UsersProvider>
-                        <CurrentUserContextProvider>
-                            <AppRouter/>
-                        </CurrentUserContextProvider>
+                        <PostsProvider>
+                            <CurrentUserContextProvider>
+                                <AppRouter/>
+                            </CurrentUserContextProvider>
+                        </PostsProvider>
                     </UsersProvider>
             </div>
 

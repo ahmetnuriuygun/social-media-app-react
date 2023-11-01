@@ -1,7 +1,9 @@
 import {createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut} from "firebase/auth";
 import auth, {firebase, firestoreDB} from "./firebase";
 
-import {addDoc, collection,deleteDoc } from "firebase/firestore";
+import {addDoc, arrayUnion, collection, deleteDoc, updateDoc} from "firebase/firestore";
+import {useContext} from "react";
+import {CurrentUserContext} from "../context/CurrentUserContext";
 
 export const userConverter = {
     toFirestore: function (dataInApp) {
@@ -13,6 +15,7 @@ export const userConverter = {
             birthDate: dataInApp.birthDate,
             gender: dataInApp.gender,
             friends:[],
+            posts:[],
             postsAmount:0,
             friendsAmount:0,
             isPremium:'start',
@@ -28,6 +31,27 @@ export const userConverter = {
         return {...data, id: snapshot.id, ref: snapshot.ref}
     }
 };
+
+
+export const postConverter = {
+    toFirestore: function (dataInApp) {
+        return {
+            text:dataInApp.text,
+            comments:[],
+            likesAmount:0,
+            ownerId:dataInApp.ownerId,
+            photoUrl:dataInApp.photoUrl,
+            arrayOfLikedUsers:[],
+        };
+    },
+    fromFirestore: function (snapshot, options) {
+        const data = snapshot.data(options);
+        return {...data, id: snapshot.id, ref: snapshot.ref}
+    }
+};
+
+
+
 export const createUser = async (firstName,lastName,email,password,birthDate,gender,navigate) => {
     try {
         let userCredential = await createUserWithEmailAndPassword(
@@ -86,6 +110,7 @@ export function addUser(firstName,lastName,email,password,birthDate,gender){
         password: password,
         birthDate: birthDate,
         gender: gender,
+        posts:[],
         friends:[],
         postsAmount:0,
         friendsAmount:0,
@@ -95,6 +120,8 @@ export function addUser(firstName,lastName,email,password,birthDate,gender){
         country:"",
         receiveFriendRequest:[],
         sendFriendRequest:[],
+        arrayOfLikedUsers:[],
+
     }
     const collectionRef = collection(firestoreDB, 'Users').withConverter(userConverter)
 
@@ -103,6 +130,30 @@ export function addUser(firstName,lastName,email,password,birthDate,gender){
         console.log("add dummy person done");
     } catch {
         console.log("ERROR add dummy person NOT done")
+    }
+}
+
+export function addPost(text,ownerId,photoUrl,currentUser){
+
+    const newPost = {
+        text:text,
+        comments:[],
+        likesAmount:0,
+        ownerId:ownerId,
+        photoUrl:photoUrl,
+
+    }
+    const collectionRef = collection(firestoreDB, 'Posts').withConverter(postConverter)
+    try {
+        addDoc(collectionRef, newPost,photoUrl).then(
+            updateDoc(currentUser.ref,{posts:arrayUnion(newPost.id)})
+
+        )
+        console.log("add post done");
+
+    } catch {
+        console.log("ERROR add dummy person NOT done")
+
     }
 }
 

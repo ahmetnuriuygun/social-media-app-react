@@ -17,7 +17,7 @@ import {CurrentUserContext} from "../context/CurrentUserContext";
 const AppRouter = () => {
     const currentUser = useContext(CurrentUserContext)
     function PrivateRouter() {
-        return currentUser ? <Outlet /> : <Navigate to="/login" replace />;
+        return currentUser ? <Outlet /> : <Navigate to="/home" replace />;
     }
     return (
         <BrowserRouter>

@@ -24,7 +24,7 @@ export function Home(props) {
                     <div className="main col-sm-12 col-lg-10  col-xl-6 " style={{background:theme.backgroundColor,color:theme.color}}>
                         <RandomPictures/>
                         <PostInput/>
-                        <Posts posts={posts} users={users}/>
+                        <Posts />
                     </div>
                     <div className="d-none d-lg-block col-lg-1 col-xl-3">
                         <RightSidebar />

@@ -108,7 +108,7 @@ function FriendRequestCard(props) {
 
     return (
 
-    <Card style={{width: '18rem'}} className='border'>
+    <Card style={{width: '18rem'}} className='rounded mt-3 p-2'>
         <div className='d-flex m-3'>
             <img src={userWaitingToResponse?.profileImg ? userWaitingToResponse?.profileImg : `images/blank-profile.jpg`} width='80rem' height='50px' className='img-thumbnail'/>
             <h6 className='my-auto mx-auto'>{userWaitingToResponse?.firstName?.charAt(0).toUpperCase() + userWaitingToResponse?.firstName?.slice(1)} {userWaitingToResponse?.lastName?.charAt(0).toUpperCase() + userWaitingToResponse?.lastName?.slice(1)}</h6>
