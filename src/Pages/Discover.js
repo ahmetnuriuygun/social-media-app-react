@@ -1,23 +1,23 @@
 import {NavigationBar} from "../Components/Navbar";
 import {LeftSidebar} from "../Components/LeftSidebar";
-
 import React, {useContext, useMemo, useState} from "react";
 import {Button, Card, Col, Container, Row} from "react-bootstrap";
-import {collection, orderBy, query, updateDoc} from "firebase/firestore";
+import {collection, orderBy, query, updateDoc,arrayUnion} from "firebase/firestore";
 import {firestoreDB} from "../helpers/firebase";
 import {userConverter} from "../helpers/functions";
 import {useCollectionData} from "react-firebase-hooks/firestore";
 import  {CurrentUserContext} from "../context/CurrentUserContext";
-import {forEach} from "react-bootstrap/ElementChildren";
+import usersContext, {UsersContext} from "../context/UsersContext";
+import {RightSidebar} from "../Components/RightSidebar";
 
 function FriendSuggestionCard(props) {
     const {user} = props;
     const currentUser = useContext(CurrentUserContext);
-
-    const addFriend = () =>{
-        currentUser.map(person => updateDoc(person.ref, {friendsAmount: person.friendsAmount + 1}))
-
-        console.log(user.id)
+    console.log(currentUser.id)
+    const addFriendRequest = () =>{
+        updateDoc(currentUser.ref, {sendFriendRequest:arrayUnion(user.id) })
+        updateDoc(user.ref,{receiveFriendRequest:arrayUnion(currentUser.id)})
+        console.log(user)
     }
 
 
@@ -30,7 +30,7 @@ function FriendSuggestionCard(props) {
                     <Card.Text className='text-muted'>
                         5 common friends
                     </Card.Text>
-                    <Button variant="primary" onClick={addFriend} >Add friend</Button>
+                    <Button variant="primary" className='btn-outline' onClick={addFriendRequest} >Add friend</Button>
                 </Card.Body>
             </Card>
         </Col>
@@ -60,15 +60,8 @@ function FriendsSuggestions(props) {
 
 export function Discover(){
     const currentUser = useContext(CurrentUserContext)
+    const users = useContext(UsersContext)
 
-    const collectionRef = collection(firestoreDB, 'Users').withConverter(userConverter)
-    const queryRef = useMemo(() =>
-        query(collectionRef, orderBy("firstName")), [collectionRef]);
-
-    const [users, loading, error] = useCollectionData(queryRef);
-
-    const idOfCurrentUser = currentUser.map(c=>c.id);
-    console.log(idOfCurrentUser)
 
 
 
@@ -83,10 +76,10 @@ export function Discover(){
                         <LeftSidebar/>
                     </div>
                     <div className="main col-sm-12 col-lg-10  col-xl-6 ">
-                        <FriendsSuggestions users={users?.filter(u=>u.id!==idOfCurrentUser[0])}/>
+                        <FriendsSuggestions users={users?.filter(u=>u.id!==currentUser.id && !currentUser.sendFriendRequest.includes(u.id) && !currentUser.friends.includes(u.id) && !currentUser.receiveFriendRequest.includes(u.id))}/>
                     </div>
                     <div className="d-none d-lg-block col-lg-1 col-xl-3">
-                        {/*<RightSidebar />*/}
+                        <RightSidebar />
                     </div>
                 </div>
             </div>

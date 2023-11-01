@@ -98,7 +98,6 @@ body,html,.row-offcanvas {
 
 #sidebar-right {
     box-shadow: 1px 1px 5px rgba(0,0,0, 0.3);
-    background:#EFF2F5 ;
     float: right;
     position:fixed;
     overflow-y:auto;
@@ -237,4 +236,13 @@ body,html,.row-offcanvas {
 }
 .img-update-div img{
     margin: auto;
+}
+.dropdown-font{
+    font-size: 1.2rem;
+}
+.dropdown-img{
+    display: inline;
+    width: 10%;
+    border-radius: 40%;
+    margin-right: 10px;
 }

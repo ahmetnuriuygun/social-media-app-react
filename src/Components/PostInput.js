@@ -1,5 +1,5 @@
 import {Form} from "react-bootstrap";
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {CurrentUserContext} from "../context/CurrentUserContext";
 
 export function PostInput(){
@@ -9,8 +9,9 @@ export function PostInput(){
 
         <Form>
             <Form.Group className="input-box mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label> <img src="/images/profile.jpg"/></Form.Label>
-                <Form.Control type="text" placeholder={`What are you thinking ${currentUser.map(c=>c.firstName)}`} />
+                <Form.Label> <img className='dropdown-img' src={currentUser.profileImg ? currentUser.profileImg : `images/blank-profile.jpg`}/></Form.Label>
+                <Form.Control type="text" placeholder={`What are you thinking, ${currentUser?.firstName.charAt(0).toUpperCase() + currentUser?.firstName.slice(1)} ?`} />
+
             </Form.Group>
         </Form>
 

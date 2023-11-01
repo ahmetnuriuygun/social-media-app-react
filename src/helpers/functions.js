@@ -19,6 +19,8 @@ export const userConverter = {
             profileImg:"",
             city:"",
             country:"",
+            receiveFriendRequest:[],
+            sendFriendRequest:[],
         };
     },
     fromFirestore: function (snapshot, options) {
@@ -65,13 +67,13 @@ export const logOut = (navigate) =>{
         });
 }
 
-export const userObserver = (setCurrentUser) => {
+export const userObserver = (setSigned) => {
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            setCurrentUser(user);
+            setSigned(user);
         } else {
             // User is signed out
-            setCurrentUser(false);
+            setSigned(false);
         }
     });
 };
@@ -91,6 +93,8 @@ export function addUser(firstName,lastName,email,password,birthDate,gender){
         profileImg:"",
         city:"",
         country:"",
+        receiveFriendRequest:[],
+        sendFriendRequest:[],
     }
     const collectionRef = collection(firestoreDB, 'Users').withConverter(userConverter)
 

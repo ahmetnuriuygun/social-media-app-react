@@ -1,12 +1,11 @@
-import React, {useContext, useState} from "react";
+import React, {useState} from "react";
 import {Col, Form, Row} from "react-bootstrap";
 import {createUser, signIn} from "../helpers/functions.js";
 import {useNavigate} from "react-router-dom";
-import {ThemeContext} from "../context/ThemeContext";
 
 
 function LogInRegisterNavbar() {
-    const [{theme,isDark},toggleTheme] = useContext(ThemeContext);
+
 
     const [info, setInfo] = useState({
         email: "",

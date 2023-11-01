@@ -11,13 +11,14 @@ import {ThemeContext} from "../context/ThemeContext";
 import BootstrapSwitchButton from 'bootstrap-switch-button-react'
 import * as PropTypes from "prop-types";
 import {logOut} from "../helpers/functions";
+import {RightSidebar} from "../Components/RightSidebar";
 
 
 
 function UpdateProfile() {
     const currentUser = useContext(CurrentUserContext);
 
-    const [userToEdit, setUserToEdit] = useState(...currentUser);
+    const [userToEdit, setUserToEdit] = useState(currentUser);
     const navigate = useNavigate();
     const [image, setImage] = useState(null);
     const [url, setUrl] = useState(null);
@@ -187,7 +188,6 @@ function UpdateProfile() {
 }
 
 function PremiumContent() {
-    const currentUser = useContext(CurrentUserContext);
 
     return(
        <div>
@@ -345,7 +345,6 @@ RemoveAccountModal.propTypes = {
 
 function AccountManagement() {
 
-    const currentUser = useContext(CurrentUserContext);
 
     const [{theme,isDark},toggleTheme] = useContext(ThemeContext);
     const [showStopAccount, setShowStopAccount] = useState(false);
@@ -405,7 +404,7 @@ function AccountManagement() {
 export function Settings(props) {
     const [{theme,isDark},toggleTheme] = useContext(ThemeContext);
 
-    const {users} = props;
+
     return (
         <>
 
@@ -436,7 +435,7 @@ export function Settings(props) {
                             </Tab>
                         </Tabs></div>
                     <div className="d-none d-lg-block col-lg-1 col-xl-3">
-                        {/*<RightSidebar users={users}/>*/}
+                        <RightSidebar/>
                     </div>
                 </div>
             </div>

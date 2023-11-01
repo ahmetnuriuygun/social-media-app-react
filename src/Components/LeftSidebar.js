@@ -18,16 +18,15 @@ export function LeftSidebar() {
 
         <div className="row-offcanvas row-offcanvas-left">
             <div id="sidebar-left" className="sidebar-offcanvas" style={{background:theme.backgroundColor,color:theme.color}}>
-                {currentUser?.map((c) =>
                     <>
                     <div className="d-flex flex-col justify-content-center align-items-center">
 
                     <div>
 
-                                <img src={c.profileImg ? c.profileImg : `images/blank-profile.jpg`} alt="img" className="justify-content-center"/>
-                                <h3 className="text-center">{c.firstName.charAt(0).toUpperCase() + c.firstName.slice(1)} {c.lastName.charAt(0).toUpperCase() + c.lastName.slice(1)}</h3>
+                                <img src={currentUser?.profileImg ? currentUser?.profileImg : `images/blank-profile.jpg`} alt="img" className="justify-content-center"/>
+                                <h3 className="text-center text-capitalize">{currentUser?.firstName} {currentUser?.lastName}</h3>
                                 {
-                                    c.city || c.country ? <p className="text-center">{c.city.charAt(0).toUpperCase() + c.city.slice(1)},{c.country.charAt(0).toUpperCase() + c.country.slice(1)}</p> :
+                                    currentUser?.city || currentUser?.country ? <p className="text-center">{currentUser?.city.charAt(0).toUpperCase() + currentUser?.city.slice(1)},{currentUser?.country.charAt(0).toUpperCase() + currentUser?.country.slice(1)}</p> :
                                         <Button className='btn-not-completed justify-content-center text-center mr-auto' onClick={()=>navigate("/settings")}>Complete your registration</Button>
                                 }
 
@@ -41,24 +40,24 @@ export function LeftSidebar() {
                 <div className="d-flex flex-row justify-content-center align-items-center">
 
                     <div className="m-3">
-                        <h3 className="text-center">{c.postsAmount}</h3>
+                        <h3 className="text-center">{currentUser?.postsAmount}</h3>
                         <p>Posts</p>
                     </div>
                     <div className="m-3">
-                        <h3 className="text-center">{c.friendsAmount}</h3>
-                        <p>Followers</p>
+                        <h3 className="text-center">{currentUser?.friendsAmount}</h3>
+                        <p>Friends</p>
                     </div>
 
                 </div>
 
                         {
-                            c.friends ?  <Button className='btn-discover justify-content-center text-center mr-auto' onClick={()=>navigate("/discover")} >Discover your friends</Button> : ""
+                            currentUser?.friends ?  <Button className='btn-discover justify-content-center text-center mr-auto' onClick={()=>navigate("/discover")} >Discover your friends</Button> : ""
 
                         }
                     </>
 
 
-                )}
+
                 <hr/>
 
                 <div>

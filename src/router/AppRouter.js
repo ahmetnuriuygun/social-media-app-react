@@ -7,15 +7,15 @@ import {
     Outlet,
     Navigate,
 } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
 import {LoginRegister} from "../Pages/LoginRegister";
 import {Home} from "../Pages/Home";
 import {POSTS_DATA, USER_DATA} from "../data/data";
 import {Settings} from "../Pages/Settings";
 import {Discover} from "../Pages/Discover";
+import {CurrentUserContext} from "../context/CurrentUserContext";
 
 const AppRouter = () => {
-    const { currentUser } = useContext(AuthContext);
+    const currentUser = useContext(CurrentUserContext)
     function PrivateRouter() {
         return currentUser ? <Outlet /> : <Navigate to="/login" replace />;
     }

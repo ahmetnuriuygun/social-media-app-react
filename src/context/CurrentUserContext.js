@@ -3,7 +3,6 @@ import {collection, orderBy, query} from "firebase/firestore";
 import {firestoreDB} from "../helpers/firebase";
 import {userConverter, userObserver} from "../helpers/functions";
 import {useCollectionData} from "react-firebase-hooks/firestore";
-import {AuthContext} from "./AuthContext";
 
 export const CurrentUserContext = createContext();
 
@@ -11,9 +10,15 @@ const CurrentUserProvider = ({children}) => {
     const collectionRef = collection(firestoreDB, 'Users').withConverter(userConverter)
     const queryRef = query(collectionRef, orderBy("firstName"))
     const [users, loading, error] = useCollectionData(queryRef);
+    const [signed, setSigned] = useState();
 
-    const signedUser = useContext(AuthContext);
-    const currentUser =   users?.filter(u=>signedUser.currentUser.email===u.email)
+    useEffect(() => {
+        // setCurrentUser(JSON.parse(sessionStorage.getItem("user")));
+        userObserver(setSigned);
+    }, []);
+
+    const signedUser = {signed}
+    const currentUser =   users?.filter(u=>signedUser.signed.email===u.email)[0]
 
 
 

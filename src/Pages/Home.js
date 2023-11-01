@@ -3,8 +3,7 @@ import {LeftSidebar} from "../Components/LeftSidebar";
 import {RandomPictures} from "../Components/RandomPictures";
 import {PostInput} from "../Components/PostInput";
 import {Posts} from "../Components/Posts";
-import {useContext, useMemo} from "react";
-import {CurrentUserContext} from "../context/CurrentUserContext";
+import {useContext} from "react";
 import {RightSidebar} from "../Components/RightSidebar";
 import {ThemeContext} from "../context/ThemeContext";
 
@@ -28,7 +27,7 @@ export function Home(props) {
                         <Posts posts={posts} users={users}/>
                     </div>
                     <div className="d-none d-lg-block col-lg-1 col-xl-3">
-                        {/*<RightSidebar users={users}/>*/}
+                        <RightSidebar />
                     </div>
                 </div>
             </div>
