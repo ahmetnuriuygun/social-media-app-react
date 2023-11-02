@@ -1,7 +1,7 @@
 import {createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut} from "firebase/auth";
 import auth, {firebase, firestoreDB} from "./firebase";
 
-import {addDoc, arrayUnion, collection, deleteDoc, updateDoc} from "firebase/firestore";
+import {addDoc,getDoc, arrayUnion, collection, deleteDoc, updateDoc} from "firebase/firestore";
 import {useContext} from "react";
 import {CurrentUserContext} from "../context/CurrentUserContext";
 
@@ -133,28 +133,20 @@ export function addUser(firstName,lastName,email,password,birthDate,gender){
     }
 }
 
-export function addPost(text,ownerId,photoUrl,currentUser){
+export async function addPost(text, ownerId, photoUrl, currentUser) {
 
-    const newPost = {
-        text:text,
-        comments:[],
-        likesAmount:0,
-        ownerId:ownerId,
-        photoUrl:photoUrl,
+    const docRef = await addDoc(collection(firestoreDB, "Posts"), {
+        text: text,
+        comments: [],
+        likesAmount: 0,
+        ownerId: ownerId,
+        photoUrl: photoUrl,
+    });
+    updateDoc(currentUser.ref,{posts:arrayUnion(docRef.id)})
 
-    }
-    const collectionRef = collection(firestoreDB, 'Posts').withConverter(postConverter)
-    try {
-        addDoc(collectionRef, newPost,photoUrl).then(
-            updateDoc(currentUser.ref,{posts:arrayUnion(newPost.id)})
 
-        )
-        console.log("add post done");
 
-    } catch {
-        console.log("ERROR add dummy person NOT done")
 
-    }
 }
 
 

@@ -12,6 +12,7 @@ import {firestoreDB} from "../helpers/firebase";
 import {useCollectionData} from "react-firebase-hooks/firestore";
 import {forEach} from "react-bootstrap/ElementChildren";
 import {UsersContext} from "../context/UsersContext";
+import {PostsContext} from "../context/PostsContext";
 
  function NotificationFriendRequest(){
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -40,10 +41,79 @@ import {UsersContext} from "../context/UsersContext";
     )
 
 }
+
+function NotificationPostLike(props) {
+     const {postsOfCurrentUser} = props;
+    const currentUser = useContext(CurrentUserContext);
+    const usersContext = useContext(UsersContext);
+    let idOfHasLikedUser;
+    let firstName;
+    let lastName;
+
+
+
+    postsOfCurrentUser?.forEach(p=>{
+        idOfHasLikedUser = p.arrayOfLikedPersons;
+    })
+
+
+    usersContext.forEach(u=>{
+        if(idOfHasLikedUser[idOfHasLikedUser.length-1]===u.id){
+            firstName = u.firstName;
+            lastName = u.lastName;
+        }
+    })
+
+    console.log(firstName,lastName)
+    return (
+        <Dropdown.Item > <p className='dropdown-font'><span className='text-capitalize'>{firstName} {lastName}</span> liked your post</p></Dropdown.Item>
+
+    );
+}
+
+function NotificationPostComment(props) {
+    const {postsOfCurrentUser} = props;
+    const currentUser = useContext(CurrentUserContext);
+    const postsContext = useContext(PostsContext);
+    const usersContext = useContext(UsersContext);
+    let idOfHasCommentedUser;
+    let firstName;
+    let lastName;
+
+
+
+    postsOfCurrentUser.forEach(p=>{
+        idOfHasCommentedUser = p.comments[p.comments.length-1].commentOwner;
+    })
+
+
+    usersContext.forEach(u=>{
+        if(idOfHasCommentedUser===u.id){
+            firstName = u.firstName;
+            lastName = u.lastName;
+        }
+    })
+
+    console.log(firstName,lastName)
+    return (
+        <Dropdown.Item > <p className='dropdown-font'><span className='text-capitalize'>{firstName} {lastName}</span> commented your post</p></Dropdown.Item>
+
+    );
+}
+
 export function NavigationBar(){
     const navigate = useNavigate();
     const [{theme,isDark},toggleTheme] = useContext(ThemeContext);
     const currentUser = useContext(CurrentUserContext);
+    let postsOfCurrentUser = []
+    const postsContext = useContext(PostsContext);
+
+
+    postsContext.forEach(p=>{
+        if(p.ownerId===currentUser.id){
+            postsOfCurrentUser.push(p);
+        }
+    })
 
 
 
@@ -102,10 +172,9 @@ export function NavigationBar(){
                             </Dropdown.Toggle>
                             <Dropdown.Menu >
                                 <Dropdown.Item className='text-capitalize'  eventKey="4.4"><p className='dropdown-font'>Welcome {currentUser?.firstName} {currentUser?.lastName}</p></Dropdown.Item>
-
-                                {!currentUser?.receiveFriendRequest ? "" : <NotificationFriendRequest></NotificationFriendRequest>
-
-                                }
+                                {!currentUser?.receiveFriendRequest ? "" : <NotificationFriendRequest></NotificationFriendRequest>}
+                                <NotificationPostLike postsOfCurrentUser={postsOfCurrentUser}></NotificationPostLike>
+                                <NotificationPostComment postsOfCurrentUser={postsOfCurrentUser}></NotificationPostComment>
                                 <Dropdown.Divider />
                             </Dropdown.Menu>
 
