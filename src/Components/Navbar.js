@@ -52,16 +52,16 @@ function NotificationPostLike(props) {
 
 
 
-    postsOfCurrentUser?.forEach(p=>{
+    postsOfCurrentUser.forEach(p=>{
         idOfHasLikedUser = p.arrayOfLikedPersons;
     })
 
-
-    usersContext.forEach(u=>{
-        if(idOfHasLikedUser[idOfHasLikedUser.length-1]===u.id){
-            firstName = u.firstName;
-            lastName = u.lastName;
-        }
+console.log(idOfHasLikedUser)
+    usersContext?.forEach(u=>{
+        if(idOfHasLikedUser[idOfHasLikedUser?.length-1]===u.id){
+                firstName = u.firstName;
+                lastName = u.lastName;
+            }
     })
 
     console.log(firstName,lastName)
@@ -115,12 +115,14 @@ export function NavigationBar(){
         }
     })
 
+    console.log(postsOfCurrentUser)
+
 
 
     return (
 
 
-        <nav className="navbar navbar-light navbar-expand-sm bg-faded justify-content-center" style={{background:theme.backgroundColor,color:theme.color}}>
+        <nav className="navbar navbar-light  navbar-expand-sm bg-faded justify-content-center" style={{background:theme.backgroundColor,color:theme.color}}>
             <a onClick={()=>navigate("/home")} className="navbar-brand d-flex w-50 mr-auto header-logo text-primary">FRIEND SPACE<FontAwesomeIcon icon={faCat} bounce /></a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
                 <span className="navbar-toggler-icon"></span>
@@ -146,7 +148,7 @@ export function NavigationBar(){
                 </ul>
                 <ul className="nav navbar-nav ml-auto w-100 justify-content-end d-sm-none d-md-flex ">
                     <li className="nav-item">
-                        <a href="#"><FontAwesomeIcon icon={faUser} /></a>
+                        <a onClick={()=>navigate(`/profile/${currentUser.id}`)} href="#"><FontAwesomeIcon icon={faUser} /></a>
                     </li>
                     <li className="nav-item me-2">
                         {/*<DropdownButton id="dropdown-basic-button" title={<FontAwesomeIcon icon={faGear} />} >*/}
@@ -173,8 +175,8 @@ export function NavigationBar(){
                             <Dropdown.Menu >
                                 <Dropdown.Item className='text-capitalize'  eventKey="4.4"><p className='dropdown-font'>Welcome {currentUser?.firstName} {currentUser?.lastName}</p></Dropdown.Item>
                                 {!currentUser?.receiveFriendRequest ? "" : <NotificationFriendRequest></NotificationFriendRequest>}
-                                <NotificationPostLike postsOfCurrentUser={postsOfCurrentUser}></NotificationPostLike>
-                                <NotificationPostComment postsOfCurrentUser={postsOfCurrentUser}></NotificationPostComment>
+                                {postsOfCurrentUser[postsOfCurrentUser?.length-1]?.likesAmount > 0 ? <NotificationPostLike postsOfCurrentUser={postsOfCurrentUser}></NotificationPostLike> : "" }
+                                {postsOfCurrentUser[postsOfCurrentUser?.length-1]?.comments ? <NotificationPostComment postsOfCurrentUser={postsOfCurrentUser}></NotificationPostComment> : ""}
                                 <Dropdown.Divider />
                             </Dropdown.Menu>
 

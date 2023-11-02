@@ -14,6 +14,7 @@
 .navbar{
     background: white;
     padding:1em;
+    position: relative;
     /*box-shadow: inset 0 -3px 0 0 cornflowerblue;*/
     box-shadow: 1px 1px 5px rgba(0,0,0, 0.3);
 
@@ -247,4 +248,12 @@ body,html,.row-offcanvas {
 }
 .like-button:active{
     color: red;
+}
+#profile-page-cards{
+    width: 100%;
+    height: fit-content;
+    border-radius: 10px;
+    padding: 0.5em;
+    background: white;
+    margin-bottom: 1.5em;
 }

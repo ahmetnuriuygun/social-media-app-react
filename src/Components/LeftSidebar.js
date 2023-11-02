@@ -21,7 +21,7 @@ export function LeftSidebar() {
                     <>
                     <div className="d-flex flex-col justify-content-center align-items-center">
 
-                    <div>
+                    <div onClick={()=>navigate(`/profile/${currentUser.id}`)}>
 
                                 <img src={currentUser?.profileImg ? currentUser?.profileImg : `images/blank-profile.jpg`} alt="img" className="justify-content-center"/>
                                 <h3 className="text-center text-capitalize">{currentUser?.firstName} {currentUser?.lastName}</h3>

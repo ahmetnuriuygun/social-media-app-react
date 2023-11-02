@@ -13,7 +13,7 @@ import {RightSidebar} from "../Components/RightSidebar";
 function FriendSuggestionCard(props) {
     const {user} = props;
     const currentUser = useContext(CurrentUserContext);
-    console.log(currentUser.id)
+    // console.log(currentUser.id)
     const addFriendRequest = () =>{
         updateDoc(currentUser.ref, {sendFriendRequest:arrayUnion(user.id) })
         updateDoc(user.ref,{receiveFriendRequest:arrayUnion(currentUser.id)})

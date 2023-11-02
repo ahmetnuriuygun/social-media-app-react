@@ -72,7 +72,7 @@ function UpdateProfile() {
                                           onChange={handleImageChange}/>
 
                         </Form.Group>
-                        <input className="btn btn-success m-3 btn-block " type="submit" value="Change Profile Picture"/>
+                        <input className="btn btn-success m-3 btn-block" type="submit" value="Change Profile Picture"/>
 
                     </Col>
                 </Row>

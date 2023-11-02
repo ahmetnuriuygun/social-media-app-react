@@ -13,6 +13,7 @@ import {POSTS_DATA, USER_DATA} from "../data/data";
 import {Settings} from "../Pages/Settings";
 import {Discover} from "../Pages/Discover";
 import {CurrentUserContext} from "../context/CurrentUserContext";
+import {Profile} from "../Pages/Profile";
 
 const AppRouter = () => {
     const currentUser = useContext(CurrentUserContext)
@@ -32,6 +33,12 @@ const AppRouter = () => {
                 <Route path="/discover" element={<PrivateRouter />}>
                     <Route path="/discover" element={<Discover />}/>
                 </Route>
+                <Route path="/profile/:id" element={<PrivateRouter />}>
+                    <Route path="/profile/:id" element={<Profile />}/>
+                </Route>
+
+
+
 
             </Routes>
         </BrowserRouter>

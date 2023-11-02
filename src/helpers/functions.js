@@ -24,6 +24,14 @@ export const userConverter = {
             country:"",
             receiveFriendRequest:[],
             sendFriendRequest:[],
+            workPlace:"",
+            highschool:"",
+            university:"",
+            hometown:"",
+            relationship:"",
+            phoneNumber:"",
+            biography:"",
+            hobby:"",
         };
     },
     fromFirestore: function (snapshot, options) {
@@ -121,7 +129,14 @@ export function addUser(firstName,lastName,email,password,birthDate,gender){
         receiveFriendRequest:[],
         sendFriendRequest:[],
         arrayOfLikedUsers:[],
-
+        workPlace:"",
+        highschool:"",
+        university:"",
+        hometown:"",
+        relationship:"",
+        phoneNumber:"",
+        biography:"",
+        hobby:"",
     }
     const collectionRef = collection(firestoreDB, 'Users').withConverter(userConverter)
 
@@ -141,6 +156,8 @@ export async function addPost(text, ownerId, photoUrl, currentUser) {
         likesAmount: 0,
         ownerId: ownerId,
         photoUrl: photoUrl,
+        arrayOfLikedPersons:[],
+
     });
     updateDoc(currentUser.ref,{posts:arrayUnion(docRef.id)})
 

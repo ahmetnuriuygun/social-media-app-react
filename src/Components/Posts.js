@@ -23,7 +23,7 @@ export function Posts(props) {
     )
 }
 
-function PostCard(props) {
+export function PostCard(props) {
     const [{theme, isDark}, toggleTheme] = useContext(ThemeContext);
     const {post} = props;
     const currentUser = useContext(CurrentUserContext);
@@ -78,17 +78,20 @@ function PostCard(props) {
     }
 
 
-    let firstNameUserOfCommented;
-    let lastNameUserOfCommented;
-    let profileImgUserOfCommented;
-    let commentToWrite;
+    let firstNameUserOfCommented = ""
+    let lastNameUserOfCommented = ""
+    let profileImgUserOfCommented = ""
+    let commentToWrite = ""
 
     users.forEach(u => {
-        if (u.id === post.comments[post.comments.length - 1].commentOwner) {
-            commentToWrite = post.comments[post.comments.length - 1].text
-            firstNameUserOfCommented = u.firstName;
-            lastNameUserOfCommented = u.lastName;
-            profileImgUserOfCommented = u.profileImg;
+        if (u.id === post.comments[post.comments.length - 1]?.commentOwner) {
+            if(post.comments.length>0){
+                commentToWrite = post.comments[post.comments.length - 1].text
+                firstNameUserOfCommented = u.firstName;
+                lastNameUserOfCommented = u.lastName;
+                profileImgUserOfCommented = u.profileImg;
+            }
+
         }
     })
 
@@ -99,12 +102,11 @@ function PostCard(props) {
 
     return (
         <Card className='post-card' style={{background: theme.backgroundColor, color: theme.color}}>
-
             <Card.Body>
                 <Card.Title>
                     <img className='profile-img-card rounded-circle'
                          src={profileImg ? profileImg : `images/blank-profile.jpg`}/>
-                    <span className='h5 text-capitalize'>{firstName} {lastName}</span>
+                    <span className='h5 text-capitalize ms-3'>{firstName} {lastName}</span>
                 </Card.Title>
                 <Card.Text>
                     {post.text}
@@ -126,13 +128,12 @@ function PostCard(props) {
                 <div>
                     <Collapse in={openCommentSection} dimension="width">
                         <div id="example-collapse-text">
-                            <Card body style={{width: '600px'}}>
+                            <Card body style={{background: theme.backgroundColor, color: theme.color,width: '600px'}}>
                                 <Form.Group className='input-box'>
                                     <Form.Label> <img className='dropdown-img'
                                                       src={profileImgUserOfCommented ? profileImgUserOfCommented : `images/blank-profile.jpg`}/></Form.Label>
                                     <InputGroup className="mb-3">
-                                        {/*<Form.Control id='displayComment' placeholder="comment"  readOnly/>*/}
-                                        {/*<textarea id="commentTextarea" readOnly>${combinedText}</textarea>*/}
+
                                         <div id="commentDisplay" >
                                             <h5 className='text-capitalize'>{firstNameUserOfCommented + " " + lastNameUserOfCommented} </h5> <h6>{commentToWrite}</h6>
                                         </div>

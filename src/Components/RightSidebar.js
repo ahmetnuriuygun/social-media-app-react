@@ -10,6 +10,7 @@ import {CurrentUserContext} from "../context/CurrentUserContext";
 import {Button, Card} from "react-bootstrap";
 import {UsersContext} from "../context/UsersContext";
 import {ThemeContext} from "../context/ThemeContext";
+import {Link, useNavigate} from "react-router-dom";
 
 export function RightSidebar() {
 
@@ -127,11 +128,18 @@ function FriendRequestCard(props) {
 
 function FriendsList(props) {
     const {friend} = props;
+    const navigate = useNavigate();
     console.log(friend)
     return (
-        <li><img src={friend?.profileImg ? friend?.profileImg : `images/blank-profile.jpg`}/>
-            {friend?.firstName?.charAt(0).toUpperCase() + friend?.firstName?.slice(1)} {friend?.lastName?.charAt(0).toUpperCase() + friend?.lastName?.slice(1)}
-        </li>
+        <div key={friend.id}>
+            <Link to={`/profile/${friend.id}`}>
+                <li ><img src={friend?.profileImg ? friend?.profileImg : `images/blank-profile.jpg`}/>
+                    {friend?.firstName?.charAt(0).toUpperCase() + friend?.firstName?.slice(1)} {friend?.lastName?.charAt(0).toUpperCase() + friend?.lastName?.slice(1)}
+                </li>
+            </Link>
+
+        </div>
+
     );
 }
 
