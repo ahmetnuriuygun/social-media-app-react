@@ -10,54 +10,55 @@ function LogInRegisterNavbar() {
         email: "",
         password: "",
     })
-    const{email,password} = info;
+    const {email, password} = info;
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        signIn(email,password,navigate)
+        signIn(email, password, navigate)
     }
     const handleChange = (e) => {
         setInfo({...info, [e.target.name]: e.target.value})
     }
     return (
-        <Navbar expand="lg" className="navbar login-navbar justify-content-center" >
+        <Navbar expand="lg" className="navbar login-navbar justify-content-center">
             <Container>
 
-            <Navbar.Brand className='login-header-div'>
-                <a href="/" className="navbar-brand d-flex login-header text-white">FRIEND SPACE</a>
-            </Navbar.Brand>
-            <Navbar.Toggle className="navbar-toggler" type="button" aria-controls="basic-navbar-nav" >
-                <span className="navbar-toggler-icon" ></span>
-            </Navbar.Toggle>
+                <Navbar.Brand className='login-header-div'>
+                    <a href="/" className="navbar-brand d-flex login-header text-white">FRIEND SPACE</a>
+                </Navbar.Brand>
+                <Navbar.Toggle className="navbar-toggler" type="button" aria-controls="basic-navbar-nav">
+                    <span className="navbar-toggler-icon"></span>
+                </Navbar.Toggle>
 
 
-            <Navbar.Collapse className="w-100 " id="basic-navbar-nav">
-                <ul className="nav navbar-nav ml-auto w-100 d-md-flex justify-content-end ">
-                    <li>
-                        <Form className="d-flex" onSubmit={handleSubmit}>
-                            <Form.Group className="ms-3" controlId="formBasicEmail">
-                                <Form.Label className="text-white">Email address</Form.Label>
-                                <Form.Control type="email" placeholder="Enter email" name="email"
-                                              onChange={handleChange}/>
-                            </Form.Group>
+                <Navbar.Collapse className="w-100 " id="basic-navbar-nav">
+                    <ul className="nav navbar-nav ml-auto w-100 d-md-flex justify-content-end ">
+                        <li>
+                            <Form className="d-flex" onSubmit={handleSubmit}>
+                                <Form.Group className="ms-3" controlId="formBasicEmail">
+                                    <Form.Label className="text-white">Email address</Form.Label>
+                                    <Form.Control type="email" placeholder="Enter email" name="email"
+                                                  onChange={handleChange}/>
+                                </Form.Group>
 
-                            <Form.Group className="ms-3" controlId="formBasicPassword">
-                                <Form.Label className="text-white">Password</Form.Label>
-                                <Form.Control type="password" placeholder="Password" name="password"
-                                              onChange={handleChange}/>
-                                <Form.Text>
-                                    <p href="#" className="text-muted">Forgotten password</p>
-                                </Form.Text>
-                            </Form.Group>
-                            <Form.Group>
-                                <input className="btn btn-primary m-4" type="submit" value="Log In"/>
-                            </Form.Group>
+                                <Form.Group className="ms-3" controlId="formBasicPassword">
+                                    <Form.Label className="text-white">Password</Form.Label>
+                                    <Form.Control type="password" placeholder="Password" name="password"
+                                                  onChange={handleChange}/>
+                                    <Form.Text>
+                                        <p href="#" className="text-muted">Forgotten password</p>
+                                    </Form.Text>
+                                </Form.Group>
+                                <Form.Group>
+                                    <input className="btn btn-primary m-4" type="submit" value="Log In"/>
+                                </Form.Group>
 
-                        </Form>
-                    </li>
-                </ul>
-            </Navbar.Collapse>
+                            </Form>
+                        </li>
+                    </ul>
+                </Navbar.Collapse>
+
             </Container>
         </Navbar>
     );
@@ -68,7 +69,7 @@ function LoginRegisterInfo() {
         <div className="login-main-info m-5 h-100">
             <h3 className="login-text-info">Friend Space helps you connect and share <br/>
                 <span>with the people in your life</span></h3>
-            <img className="mt-3 border-none" src={`images/facebook-login-main.png`}/>
+            <img className="mt-3 border-none" src={`images/facebook-login-main.png`} alt='main_picture'/>
         </div>
     );
 }
@@ -90,7 +91,7 @@ function LoginRegisterForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        createUser(firstName,lastName,email,password,birthDate,gender,navigate);
+        createUser(firstName, lastName, email, password, birthDate, gender, navigate);
     }
 
     const handleChange = (e) => {
@@ -116,14 +117,14 @@ function LoginRegisterForm() {
 
             <Row>
                 <Col className="mt-3">
-                    <Form.Control  placeholder="Email adress" type="email" required name="email"
+                    <Form.Control placeholder="Email adress" type="email" required name="email"
                                   onChange={handleChange}/>
                 </Col>
             </Row>
 
             <Row>
                 <Col className="mt-3">
-                    <Form.Control  placeholder="Password" type="password" required name="password"
+                    <Form.Control placeholder="Password" type="password" required name="password"
                                   onChange={handleChange}/>
                 </Col>
             </Row>
@@ -161,9 +162,10 @@ export function LoginRegister() {
             <main className='d-flex login-main justify-content-center'>
                 <div className='d-none d-lg-block'>
                     <LoginRegisterInfo/>
-
                 </div>
-                <LoginRegisterForm/>
+                <div>
+                    <LoginRegisterForm/>
+                </div>
             </main>
         </>
     )

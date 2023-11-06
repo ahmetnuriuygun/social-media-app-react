@@ -1,9 +1,8 @@
 import {createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut} from "firebase/auth";
-import auth, {firebase, firestoreDB} from "./firebase";
+import auth, {firestoreDB} from "./firebase";
 
-import {addDoc,getDoc, arrayUnion, collection, deleteDoc, updateDoc} from "firebase/firestore";
-import {useContext} from "react";
-import {CurrentUserContext} from "../context/CurrentUserContext";
+import {addDoc, arrayUnion, collection, updateDoc} from "firebase/firestore";
+
 
 export const userConverter = {
     toFirestore: function (dataInApp) {
@@ -14,24 +13,24 @@ export const userConverter = {
             password: dataInApp.password,
             birthDate: dataInApp.birthDate,
             gender: dataInApp.gender,
-            friends:[],
-            posts:[],
-            postsAmount:0,
-            friendsAmount:0,
-            isPremium:'start',
-            profileImg:"",
-            city:"",
-            country:"",
-            receiveFriendRequest:[],
-            sendFriendRequest:[],
-            workPlace:"",
-            highschool:"",
-            university:"",
-            hometown:"",
-            relationship:"",
-            phoneNumber:"",
-            biography:"",
-            hobby:"",
+            friends: [],
+            posts: [],
+            postsAmount: 0,
+            friendsAmount: 0,
+            isPremium: 'start',
+            profileImg: "",
+            city: "",
+            country: "",
+            receiveFriendRequest: [],
+            sendFriendRequest: [],
+            workPlace: "",
+            highschool: "",
+            university: "",
+            hometown: "",
+            relationship: "",
+            phoneNumber: "",
+            biography: "",
+            hobby: "",
         };
     },
     fromFirestore: function (snapshot, options) {
@@ -44,12 +43,12 @@ export const userConverter = {
 export const postConverter = {
     toFirestore: function (dataInApp) {
         return {
-            text:dataInApp.text,
-            comments:[],
-            likesAmount:0,
-            ownerId:dataInApp.ownerId,
-            photoUrl:dataInApp.photoUrl,
-            arrayOfLikedUsers:[],
+            text: dataInApp.text,
+            comments: [],
+            likesAmount: 0,
+            ownerId: dataInApp.ownerId,
+            photoUrl: dataInApp.photoUrl,
+            arrayOfLikedUsers: [],
         };
     },
     fromFirestore: function (snapshot, options) {
@@ -59,42 +58,39 @@ export const postConverter = {
 };
 
 
-
-export const createUser = async (firstName,lastName,email,password,birthDate,gender,navigate) => {
+export const createUser = async (firstName, lastName, email, password, birthDate, gender, navigate) => {
     try {
         let userCredential = await createUserWithEmailAndPassword(
             auth,
             email,
             password
         );
-        addUser(firstName,lastName,email,password,birthDate,gender);
+        addUser(firstName, lastName, email, password, birthDate, gender);
         navigate("/home");
-        console.log(userCredential);
     } catch (err) {
         alert(err.message)
     }
 }
 
-export const signIn = async(email,password,navigate) =>{
-    try{
+export const signIn = async (email, password, navigate) => {
+    try {
         let userCredential = await signInWithEmailAndPassword(
             auth,
             email,
             password
         );
         navigate("/home");
-        // sessionStorage.setItem("user",JSON.stringify(userCredential.user));
-    }catch(err){
+    } catch (err) {
         alert(err.message)
     }
 }
 
-export const logOut = (navigate) =>{
+export const logOut = (navigate) => {
     signOut(auth)
-        .then(()=>{
+        .then(() => {
             navigate("/");
         })
-        .catch((error)=>{
+        .catch((error) => {
             alert(error.message)
         });
 }
@@ -104,13 +100,12 @@ export const userObserver = (setSigned) => {
         if (user) {
             setSigned(user);
         } else {
-            // User is signed out
             setSigned(false);
         }
     });
 };
 
-export function addUser(firstName,lastName,email,password,birthDate,gender){
+export function addUser(firstName, lastName, email, password, birthDate, gender) {
     const newUser = {
         firstName: firstName,
         lastName: lastName,
@@ -118,33 +113,31 @@ export function addUser(firstName,lastName,email,password,birthDate,gender){
         password: password,
         birthDate: birthDate,
         gender: gender,
-        posts:[],
-        friends:[],
-        postsAmount:0,
-        friendsAmount:0,
-        isPremium:'start',
-        profileImg:"",
-        city:"",
-        country:"",
-        receiveFriendRequest:[],
-        sendFriendRequest:[],
-        arrayOfLikedUsers:[],
-        workPlace:"",
-        highschool:"",
-        university:"",
-        hometown:"",
-        relationship:"",
-        phoneNumber:"",
-        biography:"",
-        hobby:"",
+        posts: [],
+        friends: [],
+        postsAmount: 0,
+        friendsAmount: 0,
+        isPremium: 'start',
+        profileImg: "",
+        city: "",
+        country: "",
+        receiveFriendRequest: [],
+        sendFriendRequest: [],
+        arrayOfLikedUsers: [],
+        workPlace: "",
+        highschool: "",
+        university: "",
+        hometown: "",
+        relationship: "",
+        phoneNumber: "",
+        biography: "",
+        hobby: "",
     }
     const collectionRef = collection(firestoreDB, 'Users').withConverter(userConverter)
 
     try {
         addDoc(collectionRef, newUser);
-        console.log("add dummy person done");
     } catch {
-        console.log("ERROR add dummy person NOT done")
     }
 }
 
@@ -156,12 +149,10 @@ export async function addPost(text, ownerId, photoUrl, currentUser) {
         likesAmount: 0,
         ownerId: ownerId,
         photoUrl: photoUrl,
-        arrayOfLikedPersons:[],
+        arrayOfLikedPersons: [],
 
     });
-    updateDoc(currentUser.ref,{posts:arrayUnion(docRef.id)})
-
-
+    updateDoc(currentUser.ref, {posts: arrayUnion(docRef.id)})
 
 
 }

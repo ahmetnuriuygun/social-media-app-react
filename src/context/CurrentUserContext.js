@@ -9,7 +9,7 @@ export const CurrentUserContext = createContext();
 const CurrentUserProvider = ({children}) => {
     const collectionRef = collection(firestoreDB, 'Users').withConverter(userConverter)
     const queryRef = query(collectionRef, orderBy("firstName"))
-    const [users, loading, error] = useCollectionData(queryRef);
+    const [users] = useCollectionData(queryRef);
     const [signed, setSigned] = useState();
 
     useEffect(() => {
@@ -18,11 +18,10 @@ const CurrentUserProvider = ({children}) => {
     }, []);
 
     const signedUser = {signed}
-    const currentUser =   users?.filter(u=>signedUser.signed.email===u.email)[0]
+    const currentUser = users?.filter(u => signedUser.signed.email === u.email)[0]
 
 
-
-    return(
+    return (
         <CurrentUserContext.Provider value={currentUser}>
             {children}
         </CurrentUserContext.Provider>

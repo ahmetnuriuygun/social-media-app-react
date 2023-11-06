@@ -10,27 +10,24 @@ import {arrayUnion, updateDoc} from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
 
 
-export function Posts(props) {
-    const currentUser = useContext(CurrentUserContext);
+export function Posts() {
+
     const posts = useContext(PostsContext);
-
-
     return (
         <div>
             {posts.map(p => <PostCard key={p.id} post={p}/>)}
         </div>
-
     )
 }
 
 export function PostCard(props) {
-    const [{theme, isDark}, toggleTheme] = useContext(ThemeContext);
     const {post} = props;
+    const [{theme}] = useContext(ThemeContext);
     const currentUser = useContext(CurrentUserContext);
     const users = useContext(UsersContext);
-
     const [openCommentSection, setOpenCommentSection] = useState(false);
     const [comment, setComment] = useState();
+    const navigate = useNavigate();
 
     let firstName;
     let lastName;
@@ -48,9 +45,7 @@ export function PostCard(props) {
     const [isLiked, setIsLiked] = useState(false);
     const [likeCounter, setLikeCounter] = useState(1)
     const likePost = () => {
-
         setLikeCounter(likeCounter + 1)
-
         if (likeCounter % 2 === 0) {
             updateDoc(post.ref, {likesAmount: post.likesAmount - 1});
             setIsLiked(false)
@@ -61,7 +56,6 @@ export function PostCard(props) {
         }
     }
 
-    const navigate = useNavigate();
 
     const shareComment = (e) => {
         e.preventDefault();
@@ -73,8 +67,6 @@ export function PostCard(props) {
         id.value = ""
         navigate("/home")
         updateDoc(post.ref, {comments: arrayUnion(newComment)})
-
-
     }
 
 
@@ -85,7 +77,7 @@ export function PostCard(props) {
 
     users.forEach(u => {
         if (u.id === post.comments[post.comments.length - 1]?.commentOwner) {
-            if(post.comments.length>0){
+            if (post.comments.length > 0) {
                 commentToWrite = post.comments[post.comments.length - 1].text
                 firstNameUserOfCommented = u.firstName;
                 lastNameUserOfCommented = u.lastName;
@@ -96,16 +88,12 @@ export function PostCard(props) {
     })
 
 
-
-
-
-
     return (
         <Card className='post-card' style={{background: theme.backgroundColor, color: theme.color}}>
             <Card.Body>
                 <Card.Title>
                     <img className='profile-img-card rounded-circle'
-                         src={profileImg ? profileImg : `images/blank-profile.jpg`}/>
+                         src={profileImg ? profileImg : `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png`}/>
                     <span className='h5 text-capitalize ms-3'>{firstName} {lastName}</span>
                 </Card.Title>
                 <Card.Text>
@@ -126,16 +114,18 @@ export function PostCard(props) {
                 </div>
 
                 <div>
+
                     <Collapse in={openCommentSection} dimension="width">
                         <div id="example-collapse-text">
-                            <Card body style={{background: theme.backgroundColor, color: theme.color,width: '600px'}}>
+                            <Card body style={{background: theme.backgroundColor, color: theme.color, width: '600px'}}>
                                 <Form.Group className='input-box'>
                                     <Form.Label> <img className='dropdown-img'
                                                       src={profileImgUserOfCommented ? profileImgUserOfCommented : `images/blank-profile.jpg`}/></Form.Label>
                                     <InputGroup className="mb-3">
 
-                                        <div id="commentDisplay" >
-                                            <h5 className='text-capitalize'>{firstNameUserOfCommented + " " + lastNameUserOfCommented} </h5> <h6>{commentToWrite}</h6>
+                                        <div id="commentDisplay">
+                                            <h5 className='text-capitalize'>{firstNameUserOfCommented + " " + lastNameUserOfCommented} </h5>
+                                            <h6>{commentToWrite}</h6>
                                         </div>
                                     </InputGroup>
                                 </Form.Group>

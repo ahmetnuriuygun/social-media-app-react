@@ -6,13 +6,11 @@ import {Posts} from "../Components/Posts";
 import {useContext} from "react";
 import {RightSidebar} from "../Components/RightSidebar";
 import {ThemeContext} from "../context/ThemeContext";
-import {CurrentUserContext} from "../context/CurrentUserContext";
-
 
 
 export function Home(props) {
-    const {posts,users} = props;
-    const [{theme,isDark},toggleTheme] = useContext(ThemeContext);
+
+    const [{theme}] = useContext(ThemeContext);
 
     return (
         <>
@@ -20,19 +18,19 @@ export function Home(props) {
             <div className="container">
                 <div className="row">
                     <div className="d-none d-xl-block col-xl-3">
-                        <LeftSidebar />
+                        <LeftSidebar/>
                     </div>
-                    <div className="main col-sm-12 col-lg-10  col-xl-6 " style={{background:theme.backgroundColor,color:theme.color}}>
+                    <div className="main col-sm-12 col-lg-10  col-xl-6 "
+                         style={{background: theme.backgroundColor, color: theme.color}}>
                         <RandomPictures/>
-                        <PostInput />
-                        <Posts />
+                        <PostInput/>
+                        <Posts/>
                     </div>
                     <div className="d-none d-lg-block col-lg-1 col-xl-3">
-                        <RightSidebar />
+                        <RightSidebar/>
                     </div>
                 </div>
             </div>
-
         </>
 
     )

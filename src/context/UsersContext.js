@@ -5,13 +5,13 @@ import {userConverter} from "../helpers/functions";
 import {useCollectionData} from "react-firebase-hooks/firestore";
 import {CurrentUserContext} from "./CurrentUserContext";
 
-export  const UsersContext = createContext();
+export const UsersContext = createContext();
 
-const UsersProvider = ({children}) =>{
+const UsersProvider = ({children}) => {
     const collectionRef = collection(firestoreDB, 'Users').withConverter(userConverter)
     const queryRef = query(collectionRef, orderBy("firstName"))
-    const [users, loading, error] = useCollectionData(queryRef);
-    return(
+    const [users] = useCollectionData(queryRef);
+    return (
         <UsersContext.Provider value={users}>
             {children}
         </UsersContext.Provider>

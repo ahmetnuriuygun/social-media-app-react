@@ -1,46 +1,44 @@
 import {NavigationBar} from "../Components/Navbar";
 import {LeftSidebar} from "../Components/LeftSidebar";
-import React, {useContext, useMemo, useState} from "react";
+import React, {useContext} from "react";
 import {Button, Card, Col, Container, Row} from "react-bootstrap";
-import {collection, orderBy, query, updateDoc,arrayUnion} from "firebase/firestore";
-import {firestoreDB} from "../helpers/firebase";
-import {userConverter} from "../helpers/functions";
-import {useCollectionData} from "react-firebase-hooks/firestore";
-import  {CurrentUserContext} from "../context/CurrentUserContext";
-import usersContext, {UsersContext} from "../context/UsersContext";
+import {updateDoc, arrayUnion} from "firebase/firestore";
+
+import {CurrentUserContext} from "../context/CurrentUserContext";
+import {UsersContext} from "../context/UsersContext";
 import {RightSidebar} from "../Components/RightSidebar";
 
- function FriendSuggestionCard(props) {
+function FriendSuggestionCard(props) {
     const {user} = props;
     const currentUser = useContext(CurrentUserContext);
-    // console.log(currentUser.id)
-    const addFriendRequest = () =>{
-        updateDoc(currentUser.ref, {sendFriendRequest:arrayUnion(user.id) })
-        updateDoc(user.ref,{receiveFriendRequest:arrayUnion(currentUser.id)})
-        console.log(user)
+
+    const sendFriendRequest = () => {
+        updateDoc(currentUser.ref, {sendFriendRequest: arrayUnion(user.id)})
+        updateDoc(user.ref, {receiveFriendRequest: arrayUnion(currentUser.id)})
+
     }
 
 
     return (
-        <Col md={4}  >
-            <Card style={{ width: '10rem' , height:"22rem" }} className='mt-3'>
-                <Card.Img variant="top" src={user.profileImg ? user.profileImg : `images/blank-profile.jpg`} style={{width:'10rem', height:'10rem'}} />
-                <Card.Body style={{height:'4rem'}}>
+        <Col sm={6} md={4}>
+            <Card style={{width: '12rem', height: "22rem"}} className='mt-3 ms-5 ms-sm-0'>
+                <Card.Img variant="top" src={user.profileImg ? user.profileImg : `images/blank-profile.jpg`}
+                          style={{width: '12rem', height: '10rem'}}/>
+                <Card.Body style={{height: '4rem'}}>
                     <Card.Title>{user.firstName} {user.lastName}</Card.Title>
                     <Card.Text className='text-muted'>
                         5 common friends
                     </Card.Text>
-                    <Button variant="primary" className='btn-outline' onClick={addFriendRequest} >Add friend</Button>
+                    <Button variant="primary" className='btn-outline' onClick={sendFriendRequest}>Add friend</Button>
                 </Card.Body>
             </Card>
         </Col>
 
 
-
     )
 }
 
- function FriendsSuggestions(props) {
+function FriendsSuggestions(props) {
     const {users} = props;
 
     return (
@@ -49,7 +47,7 @@ import {RightSidebar} from "../Components/RightSidebar";
             <Container>
                 <Row>
 
-                        {users?.map(u=><FriendSuggestionCard key={u.id} user={u}/>)}
+                    {users?.map(u => <FriendSuggestionCard key={u.id} user={u}/>)}
 
 
                 </Row>
@@ -58,17 +56,20 @@ import {RightSidebar} from "../Components/RightSidebar";
     );
 }
 
-export function Discover(){
+export function Discover() {
     const currentUser = useContext(CurrentUserContext)
     const users = useContext(UsersContext)
 
+    function friendSuggestionFilter() {
+        return users?.filter(u =>
+            u.id !== currentUser.id
+            && !currentUser.sendFriendRequest.includes(u.id)
+            && !currentUser.friends.includes(u.id)
+            && !currentUser.receiveFriendRequest.includes(u.id))
+    }
 
-
-
-
-    return(
+    return (
         <>
-
             <NavigationBar/>
             <div className="container">
                 <div className="row">
@@ -76,10 +77,10 @@ export function Discover(){
                         <LeftSidebar/>
                     </div>
                     <div className="main col-sm-12 col-lg-10  col-xl-6 ">
-                        <FriendsSuggestions users={users?.filter(u=>u.id!==currentUser.id && !currentUser.sendFriendRequest.includes(u.id) && !currentUser.friends.includes(u.id) && !currentUser.receiveFriendRequest.includes(u.id))}/>
+                        <FriendsSuggestions users={friendSuggestionFilter()}/>
                     </div>
                     <div className="d-none d-lg-block col-lg-1 col-xl-3">
-                        <RightSidebar />
+                        <RightSidebar/>
                     </div>
                 </div>
             </div>
