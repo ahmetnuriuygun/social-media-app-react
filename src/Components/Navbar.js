@@ -83,7 +83,7 @@ function NotificationPostComment(props) {
 
 
     postsOfCurrentUser.forEach(p=>{
-        idOfHasCommentedUser = p.comments[p.comments.length-1].commentOwner;
+        idOfHasCommentedUser = p.comments[p.comments.length-1]?.commentOwner;
     })
 
 

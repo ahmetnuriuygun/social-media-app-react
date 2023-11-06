@@ -99,7 +99,7 @@ export function PostInput(){
      <Card className='my-3 rounded p-2'>
          <Form onSubmit={handleSubmit}>
              <Form.Group className='input-box' >
-                 <Form.Label onClick={()=>navigate("/profile")}> <img className='dropdown-img' src={currentUser?.profileImg ? currentUser.profileImg : `images/blank-profile.jpg`}/></Form.Label>
+                 <Form.Label onClick={()=>navigate(`/profile/${currentUser.id}`)}> <img className='dropdown-img' src={currentUser?.profileImg ? currentUser.profileImg : `images/blank-profile.jpg`}/></Form.Label>
                  <InputGroup className="mb-3">
                      <Form.Control
                          placeholder={`What are you thinking, ${currentUser?.firstName.charAt(0).toUpperCase() + currentUser?.firstName.slice(1)} ?`}

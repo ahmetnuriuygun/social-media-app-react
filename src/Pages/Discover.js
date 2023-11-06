@@ -10,7 +10,7 @@ import  {CurrentUserContext} from "../context/CurrentUserContext";
 import usersContext, {UsersContext} from "../context/UsersContext";
 import {RightSidebar} from "../Components/RightSidebar";
 
-function FriendSuggestionCard(props) {
+ function FriendSuggestionCard(props) {
     const {user} = props;
     const currentUser = useContext(CurrentUserContext);
     // console.log(currentUser.id)
@@ -40,7 +40,7 @@ function FriendSuggestionCard(props) {
     )
 }
 
-function FriendsSuggestions(props) {
+ function FriendsSuggestions(props) {
     const {users} = props;
 
     return (
