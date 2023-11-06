@@ -1,11 +1,10 @@
 import React, {useState} from "react";
-import {Col, Form, Row} from "react-bootstrap";
+import {Col, Container, Form, Nav, Navbar, Row} from "react-bootstrap";
 import {createUser, signIn} from "../helpers/functions.js";
 import {useNavigate} from "react-router-dom";
 
 
 function LogInRegisterNavbar() {
-
 
     const [info, setInfo] = useState({
         email: "",
@@ -22,17 +21,18 @@ function LogInRegisterNavbar() {
         setInfo({...info, [e.target.name]: e.target.value})
     }
     return (
-        <nav className="navbar login-navbar navbar-expand-sm  justify-content-center" >
+        <Navbar expand="lg" className="navbar login-navbar justify-content-center" >
+            <Container>
 
-            <div className='login-header-div'>
+            <Navbar.Brand className='login-header-div'>
                 <a href="/" className="navbar-brand d-flex login-header text-white">FRIEND SPACE</a>
-            </div>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
-                <span className="navbar-toggler-icon"></span>
-            </button>
+            </Navbar.Brand>
+            <Navbar.Toggle className="navbar-toggler" type="button" aria-controls="basic-navbar-nav" >
+                <span className="navbar-toggler-icon" ></span>
+            </Navbar.Toggle>
 
 
-            <div className="navbar-collapse collapse w-100 " id="collapsingNavbar3">
+            <Navbar.Collapse className="w-100 " id="basic-navbar-nav">
                 <ul className="nav navbar-nav ml-auto w-100 d-md-flex justify-content-end ">
                     <li>
                         <Form className="d-flex" onSubmit={handleSubmit}>
@@ -57,8 +57,9 @@ function LogInRegisterNavbar() {
                         </Form>
                     </li>
                 </ul>
-            </div>
-        </nav>
+            </Navbar.Collapse>
+            </Container>
+        </Navbar>
     );
 }
 
@@ -158,7 +159,10 @@ export function LoginRegister() {
         <>
             <LogInRegisterNavbar/>
             <main className='d-flex login-main justify-content-center'>
-                <LoginRegisterInfo/>
+                <div className='d-none d-lg-block'>
+                    <LoginRegisterInfo/>
+
+                </div>
                 <LoginRegisterForm/>
             </main>
         </>
