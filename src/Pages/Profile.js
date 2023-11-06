@@ -15,9 +15,8 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import {PostInput} from "../Components/PostInput";
 import {UsersContext} from "../context/UsersContext";
 import {PostsContext} from "../context/PostsContext";
-import {PostCard, Posts} from "../Components/Posts";
-import {arrayRemove, arrayUnion, updateDoc} from "firebase/firestore";
-import * as PropTypes from "prop-types";
+import {PostCard} from "../Components/Posts";
+import {arrayRemove, updateDoc} from "firebase/firestore";
 
 function FriendsCard(props) {
     const {friend} = props;
@@ -82,7 +81,7 @@ function ProfilePostsTab(props) {
         <>
             <Container>
                 <Row>
-                    <Col className='col-5'>
+                    <Col className='col-12 col-lg-5'>
                         <Card className='bg-white border border-rounded p-3' id='profile-page-cards'>
                             <h4>Tag</h4>
                             {user.id===currentUser.id ? <Button className='btn btn-secondary btn-block mt-2 '>Add Biography</Button>: ""}
@@ -91,7 +90,7 @@ function ProfilePostsTab(props) {
                             {user.id===currentUser.id ? <Button className='btn btn-secondary btn-block mt-2 '>Add Hobby</Button> : ""}
                         </Card>
                     </Col>
-                    <Col className='col-7'>
+                    <Col className='col-12 col-lg-7'>
                         <Card className='bg-white border border-rounded w-100 p-0  ' id='profile-page-cards'>
                             {user.id===currentUser.id ? <PostInput /> : ""}
                         </Card>
@@ -99,7 +98,7 @@ function ProfilePostsTab(props) {
                 </Row>
 
                 <Row className='mt-3'>
-                    <Col className='col-5'>
+                    <Col className='col-12 col-lg-5'>
                         <Card className='bg-white border border-rounded p-3' id='profile-page-cards'>
                             <Card.Title ><h4 className='fw-bold'>Friends</h4></Card.Title>
                             <Card.Text>{user.friendsAmount} friends</Card.Text>
@@ -110,8 +109,8 @@ function ProfilePostsTab(props) {
                             </Container>
                         </Card>
                     </Col>
-                    <Col>
-                        {postsOfUser.map(p=> <PostCard key={p.id} post={p}  />)}
+                    <Col className='col-12 col-lg-7 '>
+                        {postsOfUser.map(p=> <PostCard key={p.id} post={p}   />)}
                     </Col>
                 </Row>
             </Container>
@@ -312,7 +311,7 @@ export function Profile() {
                 </div>
 
                 {user.id===currentUser.id ?
-                <div className='mt-5'>
+                <div className='mt-lg-5 d-inline d-lg-block'>
                     <Button className='btn btn-secondary' onClick={() => navigate(`/settings`)}><FontAwesomeIcon
                         icon={faPen} className='me-2'/>Edit Profile</Button>
                 </div> : ""}
