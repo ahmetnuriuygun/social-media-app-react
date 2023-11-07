@@ -13,6 +13,7 @@ import {Settings} from "../Pages/Settings";
 import {Discover} from "../Pages/Discover";
 import {CurrentUserContext} from "../context/CurrentUserContext";
 import {Profile} from "../Pages/Profile";
+import {Search} from "../Pages/Search";
 
 const AppRouter = () => {
     const currentUser = useContext(CurrentUserContext)
@@ -28,6 +29,10 @@ const AppRouter = () => {
 
                 <Route path="/home" element={<PrivateRouter/>}>
                     <Route path="/home" element={<Home/>}/>
+                </Route>
+
+                <Route path="/search/:value" element={<PrivateRouter/>}>
+                    <Route path="/search/:value" element={<Search/>}/>
                 </Route>
 
                 <Route path="/settings/:id" element={<PrivateRouter/>}>

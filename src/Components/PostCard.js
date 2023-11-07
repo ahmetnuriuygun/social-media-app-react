@@ -46,14 +46,13 @@ export function PostCard(props) {
 
         }
 
-        setLikeCounter(likeCounter + 1)
-        console.log(likeCounter)
+        setLikeCounter(likeCounter + 1);
 
         if (likeCounter % 2 === 0) {
             updateDoc(post.ref, {likesAmount: post.likesAmount - 1});
             setIsLiked(false);
-
-        } else {
+        }
+        else {
             updateDoc(post.ref, {likesAmount: post.likesAmount + 1});
             updateDoc(post.ref, {arrayOfLikedPersons: arrayUnion(currentUser.id)})
             updateDoc(user.ref, {lastLikeInfo: lastLikeInfo})

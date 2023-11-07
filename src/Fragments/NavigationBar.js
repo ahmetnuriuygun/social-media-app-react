@@ -1,7 +1,7 @@
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faBell, faCat, faEnvelope, faGear, faHouse, faMagnifyingGlass, faUser} from "@fortawesome/free-solid-svg-icons";
-import React, {useContext} from "react";
-import {Dropdown, Nav, Navbar} from "react-bootstrap";
+import React, {useContext, useState} from "react";
+import {Dropdown, Form, InputGroup, Nav, Navbar} from "react-bootstrap";
 import {logOut} from "../helpers/functions";
 import {useNavigate} from "react-router-dom";
 import {ThemeContext} from "../context/ThemeContext";
@@ -11,8 +11,18 @@ import {NotificationPostLike} from "../Components/NotificationPostLike";
 import {NotificationPostComment} from "../Components/NotificationPostComment";
 import * as PropTypes from "prop-types";
 
-function NavbarCenter(props) {
+function NavbarCenter() {
     const navigate = useNavigate();
+    const [searchValue,setSearchValue] = useState();
+    const searchUser = (e) =>{
+        e.preventDefault()
+        navigate(`/search/${searchValue}`)
+    }
+
+    const handleChange = (e)=>{
+        setSearchValue(e.target.value);
+    }
+
     return (
         <Nav className="w-100 d-none d-lg-inline-flex mr-auto justify-content-center align-items-center">
             <div className="nav-item active">
@@ -26,15 +36,15 @@ function NavbarCenter(props) {
                                                                               className="fs-4"/></a>
             </div>
             <div className=" d-none d-xl-block">
-                <div className="input-group search ">
-                    <div className="form-outline">
-                        <input type="search" id="search-input" className="form-control"
-                               placeholder="Search friends"/>
-                    </div>
-                    <button type="button" className="btn btn-dark">
-                        <FontAwesomeIcon icon={faMagnifyingGlass} className="fs-5"/>
-                    </button>
-                </div>
+                <Form onSubmit={searchUser}>
+                    <InputGroup>
+                        <Form.Control type="search" id="search-input" className="form-control"
+                                   placeholder="Search friends" onChange={handleChange}/>
+                        <button type="submit" className="btn btn-dark">
+                            <FontAwesomeIcon icon={faMagnifyingGlass} className="fs-5"/>
+                        </button>
+                    </InputGroup>
+                </Form>
             </div>
         </Nav>
     );

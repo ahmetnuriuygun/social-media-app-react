@@ -9,9 +9,11 @@ import {arrayUnion, updateDoc} from "firebase/firestore";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {storage} from "../helpers/firebase";
 import {toastErrorNotify} from "../helpers/toastNotify";
+import {ThemeContext} from "../context/ThemeContext";
 
 function PhotoShareModal(props) {
     const {showPhotoModal, onShowPhotoModal} = props;
+
     const currentUser = useContext(CurrentUserContext);
     const ownerId = currentUser?.id
     const [image, setImage] = useState(null);
@@ -75,6 +77,8 @@ function PhotoShareModal(props) {
 }
 
 export function PostInput() {
+    const [{theme}] = useContext(ThemeContext);
+
     const currentUser = useContext(CurrentUserContext);
     const [text, setText] = useState();
     const [photoUrl, setPhotoUrl] = useState("");
@@ -93,7 +97,7 @@ export function PostInput() {
 
 
     return (
-        <Card className='my-3 rounded p-2'>
+        <Card className='my-3 rounded p-2' style={{background:theme.backgroundColor,color:theme.color}}>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className='input-box'>
                     <Form.Label onClick={() => navigate(`/profile/${currentUser.id}`)}> <img className='dropdown-img'

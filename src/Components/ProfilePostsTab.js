@@ -9,6 +9,7 @@ import {faCakeCandles, faHouseChimney} from "@fortawesome/free-solid-svg-icons";
 import * as PropTypes from "prop-types";
 import {UsersContext} from "../context/UsersContext";
 import {Link} from "react-router-dom";
+import {ThemeContext} from "../context/ThemeContext";
 
 export function ProfilePostsTab(props) {
     const currentUser = useContext(CurrentUserContext);
@@ -54,6 +55,8 @@ export function ProfilePostsTab(props) {
 }
 
 function Tag(props) {
+    const [{theme}] = useContext(ThemeContext);
+
     const {user} = props;
     const currentUser = useContext(CurrentUserContext);
 
@@ -72,7 +75,7 @@ function Tag(props) {
     }
 
     return (
-        <Card className="bg-white border border-rounded p-3" id="profile-page-cards">
+        <Card className=" border border-rounded p-3" id="profile-page-cards" style={{background:theme.backgroundColor,color:theme.color}}>
             <h4>Tag</h4>
             {user.id === currentUser.id ?
                 <Button className="btn btn-secondary btn-block mt-2 ">Add Biography</Button> : ""}
@@ -92,6 +95,7 @@ Tag.propTypes = {
 };
 
 function AllFriendsCard(props) {
+    const [{theme}] = useContext(ThemeContext);
     const {user} = props;
     const users = useContext(UsersContext);
 
@@ -105,7 +109,7 @@ function AllFriendsCard(props) {
         })
     })
     return (
-        <Card className="bg-white border border-rounded p-3" id="profile-page-cards">
+        <Card className=" border border-rounded p-3" id="profile-page-cards" style={{background:theme.backgroundColor,color:theme.color}}>
             <Card.Title><h4 className="fw-bold">Friends</h4></Card.Title>
             <Card.Text>{user.friendsAmount} friends</Card.Text>
             <Container>
@@ -123,13 +127,13 @@ AllFriendsCard.propTypes = {
 };
 
 function FriendsCard(props) {
+    const [{theme}] = useContext(ThemeContext);
     const {friend} = props;
-    console.log(friend)
     return (
 
         <Col className='col-6'>
             <Link to={`/profile/${friend.id}`}>
-                <Card style={{width: '10rem'}}>
+                <Card  style={{background:theme.backgroundColor,color:theme.color,width:'10rem'}}>
                     <Card.Img variant="top" src={friend.profileImg ? friend.profileImg : `/images/blank-profile.jpg`}
                               height='200rem'/>
                     <Card.Text>
@@ -137,7 +141,6 @@ function FriendsCard(props) {
                     </Card.Text>
                 </Card>
             </Link>
-
         </Col>
 
     );

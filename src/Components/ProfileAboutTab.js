@@ -13,7 +13,7 @@ import {
     faPhone,
     faSchool
 } from "@fortawesome/free-solid-svg-icons";
-import {toastErrorNotify, toastInfoNotify, toastSuccessNotify, toastWarnNotify} from "../helpers/toastNotify";
+import {toastInfoNotify, toastSuccessNotify, toastWarnNotify} from "../helpers/toastNotify";
 
 export function ProfileAboutTab(props) {
     const {user} = props;
@@ -25,16 +25,10 @@ export function ProfileAboutTab(props) {
 
     const navigate = useNavigate();
     const handleSubmit = async  () => {
-        try{
-            updateDoc(userToEdit.ref, userToEdit).then(()=>{
-                navigate("/home");
-                toastInfoNotify("You updated your profile information.")
-            });
-        }catch(err){
-            toastErrorNotify(err.message)
-        }
 
-
+        updateDoc(userToEdit.ref, userToEdit);
+        navigate("/home");
+        toastInfoNotify("You updated your profile information.")
     }
 
     const handleChange = (e) => {

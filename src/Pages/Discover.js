@@ -10,8 +10,8 @@ import {FriendsSuggestions} from "../Components/FriendsSuggestions";
 
 
 export function Discover() {
-    const currentUser = useContext(CurrentUserContext)
-    const users = useContext(UsersContext)
+    const currentUser = useContext(CurrentUserContext);
+    const users = useContext(UsersContext);
 
     function friendSuggestionFilter() {
         return users?.filter(u =>

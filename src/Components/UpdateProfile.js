@@ -24,10 +24,6 @@ export function UpdateProfile() {
 
         navigate("/home");
         toastInfoNotify("You updated your profile information.")
-
-
-
-
     }
 
     const handleChange = (e) => {

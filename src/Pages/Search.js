@@ -1,18 +1,37 @@
+import {useParams} from "react-router-dom";
 import {NavigationBar} from "../Fragments/NavigationBar";
 import {LeftSidebar} from "../Fragments/LeftSidebar";
 import {RandomPictures} from "../Components/RandomPictures";
 import {PostInput} from "../Components/PostInput";
 import {Posts} from "../Components/Posts";
-import {useContext} from "react";
 import {RightSidebar} from "../Fragments/RightSidebar";
+import {useContext} from "react";
 import {ThemeContext} from "../context/ThemeContext";
+import {CurrentUserContext} from "../context/CurrentUserContext";
+import {FriendsSuggestions} from "../Components/FriendsSuggestions";
+import {UsersContext} from "../context/UsersContext";
 
-
-export function Home() {
-
+export function Search(){
+    const searchValue = useParams();
+    console.log(searchValue);
     const [{theme}] = useContext(ThemeContext);
+    const currentUser = useContext(CurrentUserContext);
+    const users = useContext(UsersContext);
 
-    return (
+    const filteredUsers = ()=>{
+        const filter = users?.filter(u =>
+            u.firstName.includes(searchValue.value.toUpperCase())
+        ||  u.lastName.includes(searchValue.value.toUpperCase()))
+        filter.forEach(u=>{
+            if(u.id===currentUser.id){
+                const index = filter.indexOf(u)
+                delete filter[index]
+            }
+        })
+        return filter;
+    }
+
+    return(
         <>
             <NavigationBar/>
             <div className="container">
@@ -22,9 +41,7 @@ export function Home() {
                     </div>
                     <div className="main col-sm-12 col-lg-10  col-xl-6 min-vh-100"
                          style={{background: theme.backgroundColor, color: theme.color}}>
-                        <RandomPictures/>
-                        <PostInput/>
-                        <Posts/>
+                          <FriendsSuggestions users={filteredUsers()}/>
                     </div>
                     <div className="d-none d-lg-block col-lg-1 col-xl-3">
                         <RightSidebar/>
@@ -32,7 +49,5 @@ export function Home() {
                 </div>
             </div>
         </>
-
     )
-
 }

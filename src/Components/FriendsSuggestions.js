@@ -3,6 +3,7 @@ import React, {useContext} from "react";
 import {CurrentUserContext} from "../context/CurrentUserContext";
 import {arrayUnion, updateDoc} from "firebase/firestore";
 import {toastErrorNotify, toastInfoNotify, toastSuccessNotify} from "../helpers/toastNotify";
+import {Link} from "react-router-dom";
 
 export function FriendsSuggestions(props) {
     const {users} = props;
@@ -44,17 +45,20 @@ function FriendSuggestionCard(props) {
 
     return (
         <Col sm={6} md={4}>
-            <Card style={{width: '12rem', height: "22rem"}} className='mt-3 ms-5 ms-sm-0'>
-                <Card.Img variant="top" src={user.profileImg ? user.profileImg : `images/blank-profile.jpg`}
-                          style={{width: '12rem', height: '10rem'}}/>
-                <Card.Body style={{height: '4rem'}}>
-                    <Card.Title>{user.firstName} {user.lastName}</Card.Title>
-                    <Card.Text className='text-muted'>
-                        5 common friends
-                    </Card.Text>
-                    <Button variant="primary" className='btn-outline' onClick={sendFriendRequest}>Add friend</Button>
-                </Card.Body>
-            </Card>
+            <Link to={`/profile/${user.id}`}>
+                <Card style={{width: '12rem', height: "22rem"}} className='mt-3 ms-5 ms-sm-0'>
+                    <Card.Img variant="top" src={user.profileImg ? user.profileImg : `images/blank-profile.jpg`}
+                              style={{width: '12rem', height: '10rem'}}/>
+                    <Card.Body style={{height: '4rem'}}>
+                        <Card.Title>{user.firstName} {user.lastName}</Card.Title>
+                        <Card.Text className='text-muted'>
+                            5 common friends
+                        </Card.Text>
+                        <Button variant="primary" className='btn-outline' onClick={sendFriendRequest}>Add friend</Button>
+                    </Card.Body>
+                </Card>
+            </Link>
+
         </Col>
 
 
