@@ -2,6 +2,7 @@ import {Button, Card, Col, Container, Row} from "react-bootstrap";
 import React, {useContext} from "react";
 import {CurrentUserContext} from "../context/CurrentUserContext";
 import {arrayUnion, updateDoc} from "firebase/firestore";
+import {toastErrorNotify, toastInfoNotify, toastSuccessNotify} from "../helpers/toastNotify";
 
 export function FriendsSuggestions(props) {
     const {users} = props;
@@ -25,9 +26,18 @@ function FriendSuggestionCard(props) {
     const {user} = props;
     const currentUser = useContext(CurrentUserContext);
 
-    const sendFriendRequest = () => {
-        updateDoc(currentUser.ref, {sendFriendRequest: arrayUnion(user.id)})
-        updateDoc(user.ref, {receiveFriendRequest: arrayUnion(currentUser.id)})
+    const sendFriendRequest = async () => {
+        try{
+            updateDoc(currentUser.ref, {sendFriendRequest: arrayUnion(user.id)})
+            updateDoc(user.ref, {receiveFriendRequest: arrayUnion(currentUser.id)})
+                .then(()=>{
+                    toastInfoNotify(`You sent friend request to ${user.firstName} ${user.lastName}`)
+            })
+        }catch(err){
+            toastErrorNotify(err.message)
+        }
+
+
 
     }
 

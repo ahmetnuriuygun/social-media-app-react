@@ -1,8 +1,9 @@
 import {Dropdown} from "react-bootstrap";
-import React from "react";
+import React, {useContext} from "react";
+import {CurrentUserContext} from "../context/CurrentUserContext";
 
-export function NotificationPostLike(props) {
-    const {currentUser} = props;
+export function NotificationPostLike() {
+    const currentUser = useContext(CurrentUserContext);
 
 
     return (

@@ -3,6 +3,7 @@ import {CurrentUserContext} from "../context/CurrentUserContext";
 import {UsersContext} from "../context/UsersContext";
 import {arrayRemove, arrayUnion, updateDoc} from "firebase/firestore";
 import {Button, Card} from "react-bootstrap";
+import {toastErrorNotify, toastInfoNotify, toastSuccessNotify} from "../helpers/toastNotify";
 
 export function FriendRequestCard(props) {
     const {userWaitingToResponse, onShow} = props;
@@ -22,22 +23,28 @@ export function FriendRequestCard(props) {
 
     })
 
-    const acceptFriend = () => {
+    const acceptFriend = async () => {
+        try {
+            updateDoc(currentUser?.ref, {friends: arrayUnion(userWaitingToResponse.id)},
+                updateDoc(currentUser?.ref, {friendsAmount: currentUser?.friendsAmount + 1}),
+                updateDoc(currentUser?.ref, {receiveFriendRequest: arrayRemove(userWaitingToResponse.id)}))
 
-        updateDoc(currentUser?.ref, {friends: arrayUnion(userWaitingToResponse.id)},
-            updateDoc(currentUser?.ref, {friendsAmount: currentUser?.friendsAmount + 1}),
-            updateDoc(currentUser?.ref, {receiveFriendRequest: arrayRemove(userWaitingToResponse.id)}))
-
-        users?.forEach(u => {
-            currentUser?.receiveFriendRequest?.forEach(r => {
-                if (u.id === currentUser?.receiveFriendRequest[0]) {
-                    updateDoc(u.ref, {friends: arrayUnion(currentUser?.id)},
-                        updateDoc(u.ref, {sendFriendRequest: arrayRemove(currentUser?.id)}),
-                        updateDoc(u.ref, {friendsAmount: u.friendsAmount + 1}))
-                }
+            users?.forEach(u => {
+                currentUser?.receiveFriendRequest?.forEach(r => {
+                    if (u.id === currentUser?.receiveFriendRequest[0]) {
+                        updateDoc(u.ref, {friends: arrayUnion(currentUser?.id)},
+                            updateDoc(u.ref, {sendFriendRequest: arrayRemove(currentUser?.id)}),
+                            updateDoc(u.ref, {friendsAmount: u.friendsAmount + 1}));
+                    }
+                })
             })
-        })
-        onShow(false)
+        } catch (err) {
+            toastErrorNotify(err.message);
+        }
+
+        onShow(false);
+        toastInfoNotify(`You accepted friend request`);
+
     }
 
     const refuseFriend = () => {
@@ -45,7 +52,7 @@ export function FriendRequestCard(props) {
         users?.forEach(u => {
             currentUser?.receiveFriendRequest?.forEach(r => {
                 if (u.id === currentUser.receiveFriendRequest[0]) {
-                    updateDoc(u.ref, {sendFriendRequest: arrayRemove(currentUser.id)})
+                    updateDoc(u.ref, {sendFriendRequest: arrayRemove(currentUser.id)});
 
                 }
             })

@@ -1,9 +1,10 @@
 import {DropdownItemText} from "react-bootstrap";
-import React from "react";
+import React, {useContext} from "react";
+import {CurrentUserContext} from "../context/CurrentUserContext";
 
-export function NotificationPostComment(props) {
-    const {currentUser} = props;
+export function NotificationPostComment() {
 
+    const currentUser = useContext(CurrentUserContext);
 
     return (
         <>

@@ -83,10 +83,10 @@ function NotificationDropDown(props) {
 
                 {currentUser?.receiveFriendRequest ? "" : <NotificationFriendRequest/>}
 
-                {currentUser.lastLikeInfo ? <NotificationPostLike currrentUser={currentUser}/> : ""}
+                {currentUser.lastLikeInfo ? <NotificationPostLike /> : ""}
 
                 {currentUser.lastCommentInfo ?
-                    <NotificationPostComment currrentUser={currentUser}/> : ""}
+                    <NotificationPostComment /> : ""}
 
 
             </Dropdown.Menu>
@@ -125,6 +125,7 @@ export function NavigationBar() {
     const navigate = useNavigate();
     const [{theme}] = useContext(ThemeContext);
     const currentUser = useContext(CurrentUserContext);
+
 
 
     return (

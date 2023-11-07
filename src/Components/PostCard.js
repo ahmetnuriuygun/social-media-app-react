@@ -7,6 +7,7 @@ import {arrayUnion, updateDoc} from "firebase/firestore";
 import {Button, Card, Collapse, Form, InputGroup} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faComment, faHeart, faPaperPlane, faShare} from "@fortawesome/free-solid-svg-icons";
+import {toastInfoNotify, toastSuccessNotify} from "../helpers/toastNotify";
 
 export function PostCard(props) {
     const {post} = props;
@@ -33,7 +34,8 @@ export function PostCard(props) {
     })
 
     const [isLiked, setIsLiked] = useState(false);
-    const [likeCounter, setLikeCounter] = useState(1)
+    const [likeCounter, setLikeCounter] = useState(3)
+
     const likePost = () => {
 
         const lastLikeInfo = {
@@ -44,21 +46,23 @@ export function PostCard(props) {
 
         }
 
-
         setLikeCounter(likeCounter + 1)
+        console.log(likeCounter)
+
         if (likeCounter % 2 === 0) {
             updateDoc(post.ref, {likesAmount: post.likesAmount - 1});
-            setIsLiked(false)
+            setIsLiked(false);
+
         } else {
             updateDoc(post.ref, {likesAmount: post.likesAmount + 1});
             updateDoc(post.ref, {arrayOfLikedPersons: arrayUnion(currentUser.id)})
             updateDoc(user.ref, {lastLikeInfo: lastLikeInfo})
-            setIsLiked(true)
+            setIsLiked(true);
         }
     }
 
 
-    const shareComment = (e) => {
+    const shareComment = async (e) => {
         e.preventDefault();
         const newComment = {
             text: comment,
@@ -72,12 +76,13 @@ export function PostCard(props) {
             notificationImgUrl: post.photoUrl ? post.photoUrl : currentUser.profileImg
         }
 
-
         const id = document.getElementById('text-input')
         id.value = ""
         navigate("/home")
         updateDoc(post.ref, {comments: arrayUnion(newComment)})
-        updateDoc(user.ref, {lastCommentInfo: lastCommentInfo})
+        updateDoc(user.ref, {lastCommentInfo: lastCommentInfo}).then(()=>{
+            toastInfoNotify(`You gave a comment the post of ${firstName} ${lastName}`)
+        })
     }
 
 

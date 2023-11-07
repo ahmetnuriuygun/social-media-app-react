@@ -7,6 +7,9 @@ import React, {useContext} from "react";
 import {ThemeContext} from "./context/ThemeContext";
 import UsersProvider from "./context/UsersContext";
 import PostsProvider from "./context/PostsContext";
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 function App() {
@@ -18,6 +21,7 @@ function App() {
                         <PostsProvider>
                             <CurrentUserContextProvider>
                                 <AppRouter/>
+                                <ToastContainer/>
                             </CurrentUserContextProvider>
                         </PostsProvider>
                     </UsersProvider>

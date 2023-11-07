@@ -5,6 +5,7 @@ import {updateDoc} from "firebase/firestore";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {storage} from "../helpers/firebase";
 import {Col, Form, Row} from "react-bootstrap";
+import {toastErrorNotify, toastInfoNotify, toastSuccessNotify} from "../helpers/toastNotify";
 
 export function UpdateProfile() {
     const currentUser = useContext(CurrentUserContext);
@@ -14,9 +15,19 @@ export function UpdateProfile() {
     const [image, setImage] = useState(null);
     const [url, setUrl] = useState(null);
 
-    const handleSubmit = () => {
-        updateDoc(userToEdit.ref, userToEdit);
+    const handleSubmit = async () => {
+        try{
+            updateDoc(userToEdit.ref, userToEdit)
+        }catch(err){
+            toastErrorNotify(err.message)
+        }
+
         navigate("/home");
+        toastInfoNotify("You updated your profile information.")
+
+
+
+
     }
 
     const handleChange = (e) => {
@@ -32,13 +43,14 @@ export function UpdateProfile() {
                     updateDoc(userToEdit.ref, {profileImg: url});
                 })
                 .catch((error) => {
-                    console.log(error.message)
+                    toastErrorNotify(error.message)
 
                 });
             setImage(null);
 
         })
         navigate("/home");
+        toastSuccessNotify("You changed your profile photo")
     }
 
     const handleImageChange = (e) => {

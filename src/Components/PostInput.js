@@ -8,6 +8,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {arrayUnion, updateDoc} from "firebase/firestore";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {storage} from "../helpers/firebase";
+import {toastErrorNotify} from "../helpers/toastNotify";
 
 function PhotoShareModal(props) {
     const {showPhotoModal, onShowPhotoModal} = props;
@@ -29,12 +30,12 @@ function PhotoShareModal(props) {
             getDownloadURL(storageRef)
                 .then((url) => {
                     setUrl(url);
-                    addPost(description, ownerId, url, currentUser);
+                    addPost(description, ownerId, url, currentUser,navigate);
                     updateDoc(currentUser.ref, {postsAmount: currentUser.postsAmount + 1})
 
                 })
                 .catch((error) => {
-                    console.log(error.message)
+                    toastErrorNotify(error.message)
 
                 });
             setImage(null);
@@ -84,11 +85,10 @@ export function PostInput() {
     const handleModalShow = () => setShowPhotoModal(true);
 
     const navigate = useNavigate();
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e)  => {
         e.preventDefault();
-        addPost(text, ownerId, photoUrl, currentUser);
+        addPost(text, ownerId, photoUrl, currentUser,navigate);
         updateDoc(currentUser.ref, {postsAmount: currentUser.postsAmount + 1})
-        navigate("/home")
     }
 
 

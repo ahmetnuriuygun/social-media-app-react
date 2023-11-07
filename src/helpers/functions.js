@@ -3,6 +3,7 @@ import auth, {firestoreDB} from "./firebase";
 import {serverTimestamp} from 'firebase/firestore'
 
 import {addDoc, arrayUnion, collection, updateDoc} from "firebase/firestore";
+import {toastErrorNotify, toastInfoNotify, toastSuccessNotify} from "./toastNotify";
 
 
 export const userConverter = {
@@ -70,8 +71,10 @@ export const createUser = async (firstName, lastName, email, password, birthDate
         );
         addUser(firstName, lastName, email, password, birthDate, gender);
         navigate("/home");
+        toastSuccessNotify("Welcome Friend Space family!🥳")
+
     } catch (err) {
-        alert(err.message)
+        toastErrorNotify(`${err.message}`)
     }
 }
 
@@ -82,19 +85,23 @@ export const signIn = async (email, password, navigate) => {
             email,
             password
         );
+        toastSuccessNotify("You signed in successfully!");
+
         navigate("/home");
+
     } catch (err) {
-        alert(err.message)
+        toastErrorNotify(`${err.message}`)
     }
 }
 
-export const logOut = (navigate) => {
+export const logOut = async (navigate) => {
     signOut(auth)
         .then(() => {
             navigate("/");
+            toastSuccessNotify(`You signed out successfully`)
         })
         .catch((error) => {
-            alert(error.message)
+            toastErrorNotify(`${error.message}`)
         });
 }
 
@@ -142,27 +149,33 @@ export function addUser(firstName, lastName, email, password, birthDate, gender)
 
     try {
         addDoc(collectionRef, newUser);
-    } catch {
+    }
+    catch(err) {
+        toastErrorNotify(err.message)
     }
 }
 
-export async function addPost(text, ownerId, photoUrl, currentUser) {
-    const date = serverTimestamp();
+export const addPost = async (text, ownerId, photoUrl, currentUser,navigate) => {
+    try{
+        const date = serverTimestamp();
+        const docRef = await addDoc(collection(firestoreDB, "Posts"), {
+            text: text,
+            comments: [],
+            likesAmount: 0,
+            ownerId: ownerId,
+            photoUrl: photoUrl,
+            arrayOfLikedPersons: [],
+            created: date,
+        });
+        updateDoc(currentUser.ref, {posts: arrayUnion(docRef.id)}).then(()=>{
+            navigate("/home");
+            toastInfoNotify("Post shared successfully.")
+        })
+    }
 
-    const docRef = await addDoc(collection(firestoreDB, "Posts"), {
-        text: text,
-        comments: [],
-        likesAmount: 0,
-        ownerId: ownerId,
-        photoUrl: photoUrl,
-        arrayOfLikedPersons: [],
-        created: date,
-
-
-    });
-    updateDoc(currentUser.ref, {posts: arrayUnion(docRef.id)})
-
-
+    catch(err){
+        toastErrorNotify("Oops,A problem is occurred while sharing post")
+    }
 }
 
 
