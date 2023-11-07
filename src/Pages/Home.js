@@ -1,10 +1,10 @@
-import {NavigationBar} from "../Components/Navbar";
-import {LeftSidebar} from "../Components/LeftSidebar";
+import {NavigationBar} from "../Fragments/NavigationBar";
+import {LeftSidebar} from "../Fragments/LeftSidebar";
 import {RandomPictures} from "../Components/RandomPictures";
 import {PostInput} from "../Components/PostInput";
 import {Posts} from "../Components/Posts";
 import {useContext} from "react";
-import {RightSidebar} from "../Components/RightSidebar";
+import {RightSidebar} from "../Fragments/RightSidebar";
 import {ThemeContext} from "../context/ThemeContext";
 
 

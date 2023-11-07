@@ -1,6 +1,6 @@
 import {createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut} from "firebase/auth";
 import auth, {firestoreDB} from "./firebase";
-import { serverTimestamp } from 'firebase/firestore'
+import {serverTimestamp} from 'firebase/firestore'
 
 import {addDoc, arrayUnion, collection, updateDoc} from "firebase/firestore";
 
@@ -32,8 +32,8 @@ export const userConverter = {
             phoneNumber: "",
             biography: "",
             hobby: "",
-            lastLikeInfo:"",
-            lastCommentInfo:""
+            lastLikeInfo: "",
+            lastCommentInfo: ""
         };
     },
     fromFirestore: function (snapshot, options) {
@@ -135,8 +135,8 @@ export function addUser(firstName, lastName, email, password, birthDate, gender)
         phoneNumber: "",
         biography: "",
         hobby: "",
-        lastLikeInfo:"",
-        lastCommentInfo:""
+        lastLikeInfo: "",
+        lastCommentInfo: ""
     }
     const collectionRef = collection(firestoreDB, 'Users').withConverter(userConverter)
 
@@ -147,7 +147,7 @@ export function addUser(firstName, lastName, email, password, birthDate, gender)
 }
 
 export async function addPost(text, ownerId, photoUrl, currentUser) {
-     const date = serverTimestamp();
+    const date = serverTimestamp();
 
     const docRef = await addDoc(collection(firestoreDB, "Posts"), {
         text: text,

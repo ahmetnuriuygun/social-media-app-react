@@ -25,7 +25,6 @@ function StoryCards() {
 }
 
 
-
 export function RandomPictures() {
     return (
         <Carousel>
