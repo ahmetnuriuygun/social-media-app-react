@@ -30,7 +30,7 @@ function NotificationFriendRequest() {
 
     return (
         currentUser.receiveFriendRequest.map(r =>
-            <div><p className='dropdown-font'><span><img className='dropdown-img'
+            <div><p className='dropdown-font'><span><img  className='dropdown-img'
                                                          src={profileImg ? profileImg : `images/blank-profile.jpg`}/></span><span
                 className='text-capitalize'>{firstName} {lastName}</span> send you a friend request</p></div>
         )
@@ -39,79 +39,36 @@ function NotificationFriendRequest() {
 }
 
 function NotificationPostLike(props) {
-    const {postsOfCurrentUser} = props;
-    const usersContext = useContext(UsersContext);
-    let idOfHasLikedUser;
-    let firstName;
-    let lastName;
-    let photoUrl;
-    let profileImg;
-
-
-    postsOfCurrentUser.forEach(p => {
-        idOfHasLikedUser = p.arrayOfLikedPersons;
-        photoUrl = p.photoUrl;
-    })
-
-
-    usersContext?.forEach(u => {
-        if (idOfHasLikedUser[idOfHasLikedUser?.length - 1] === u.id) {
-            firstName = u.firstName;
-            lastName = u.lastName;
-            profileImg = u.profileImg;
-        }
-    })
+    const {currentUser} = props;
 
 
     return (
         <>
-            {firstName || lastName ?
+
                 <Dropdown.ItemText>
-                    <img src={photoUrl ? photoUrl : profileImg} className='img-fluid rounded'
+                    <img src={currentUser.lastLikeInfo.notificationImgUrl ? currentUser.lastLikeInfo.notificationImgUrl : `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png} className='img-fluid rounded`}
                                         width='50rem'/>
                     <span className='dropdown-font'>
-                        <span className='text-capitalize'>{firstName} {lastName}</span> liked your post
+                        <span className='text-capitalize'>{currentUser.lastLikeInfo.firstName} {currentUser.lastLikeInfo.lastName}</span> liked your post
                     </span>
-                </Dropdown.ItemText> : ""}
+                </Dropdown.ItemText>
         </>
 
     );
 }
 
 function NotificationPostComment(props) {
-    const {postsOfCurrentUser} = props;
+    const {currentUser} = props;
 
-
-    const usersContext = useContext(UsersContext);
-    let idOfHasCommentedUser;
-    let firstName;
-    let lastName;
-    let photoUrl;
-    let profileImg;
-
-    postsOfCurrentUser.forEach(p => {
-        idOfHasCommentedUser = p.comments[p.comments.length - 1]?.commentOwner;
-        photoUrl = p.photoUrl;
-
-    })
-
-
-    usersContext.forEach(u => {
-        if (idOfHasCommentedUser === u.id) {
-            firstName = u.firstName;
-            lastName = u.lastName;
-            profileImg = u.profileImg;
-        }
-    })
 
 
     return (
-        <> {firstName || lastName ?
-            <DropdownItemText><img src={photoUrl ? photoUrl : profileImg} className='img-fluid rounded' width='50rem'/>
+        <>
+            <DropdownItemText><img src={currentUser.lastCommentInfo.notificationImgUrl ? currentUser.lastCommentInfo.notificationImgUrl : `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png} className='img-fluid rounded`} className='img-fluid rounded' width='50rem'/>
                 <span
                     className='dropdown-font'><span
-                    className='text-capitalize'>{firstName} {lastName}</span> commented your post</span>
-            </DropdownItemText> : ""}
+                    className='text-capitalize'>{currentUser.lastCommentInfo.firstName} {currentUser.lastCommentInfo.lastName}</span> commented your post</span>
+            </DropdownItemText>
         </>
 
 
@@ -122,18 +79,12 @@ export function NavigationBar() {
     const navigate = useNavigate();
     const [{theme}] = useContext(ThemeContext);
     const currentUser = useContext(CurrentUserContext);
-    const {id} = useParams();
-    let postsOfCurrentUser = []
-    const postsContext = useContext(PostsContext);
 
 
-    postsContext.forEach(p => {
-        if (p.ownerId === currentUser.id) {
-            postsOfCurrentUser.push(p);
-        }
-    })
 
-    console.log(postsOfCurrentUser)
+
+
+
 
 
     return (
@@ -211,12 +162,9 @@ export function NavigationBar() {
 
                                 {!currentUser?.receiveFriendRequest ? "" : <NotificationFriendRequest/>}
 
-                                {postsOfCurrentUser[postsOfCurrentUser.length-1].likesAmount>0 ?
-                                    <NotificationPostLike postsOfCurrentUser={postsOfCurrentUser}/> : ""
-                                }
-                                {postsOfCurrentUser[postsOfCurrentUser.length-1].comments.length>0 ?
-                                    <NotificationPostComment postsOfCurrentUser={postsOfCurrentUser}/> : ""
-                                }
+                                {currentUser.lastLikeInfo ? <NotificationPostLike currrentUser={currentUser}/> : ""}
+
+                                {currentUser.lastCommentInfo ? <NotificationPostComment currrentUser={currentUser} /> : "" }
 
 
                             </Dropdown.Menu>

@@ -8,7 +8,7 @@ export const PostsContext = createContext();
 
 const PostsProvider = ({children}) => {
     const collectionRef = collection(firestoreDB, 'Posts').withConverter(postConverter)
-    const queryRef = query(collectionRef, orderBy("ownerId"))
+    const queryRef = query(collectionRef, orderBy("created","desc"))
     const [posts] = useCollectionData(queryRef);
     return (
         <PostsContext.Provider value={posts}>

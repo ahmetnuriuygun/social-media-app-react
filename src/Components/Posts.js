@@ -32,11 +32,13 @@ export function PostCard(props) {
     let firstName;
     let lastName;
     let profileImg;
+    let user ;
     users?.forEach(u => {
         if (post.ownerId === u.id) {
             firstName = u.firstName
             lastName = u.lastName
             profileImg = u.profileImg
+            user = u;
         }
 
 
@@ -45,6 +47,17 @@ export function PostCard(props) {
     const [isLiked, setIsLiked] = useState(false);
     const [likeCounter, setLikeCounter] = useState(1)
     const likePost = () => {
+
+        const lastLikeInfo = {
+            firstName : currentUser.firstName,
+            lastName : currentUser.lastName,
+            post : post.id,
+            notificationImgUrl : post.photoUrl ? post.photoUrl : currentUser.profileImg
+
+        }
+
+
+
         setLikeCounter(likeCounter + 1)
         if (likeCounter % 2 === 0) {
             updateDoc(post.ref, {likesAmount: post.likesAmount - 1});
@@ -52,6 +65,7 @@ export function PostCard(props) {
         } else {
             updateDoc(post.ref, {likesAmount: post.likesAmount + 1});
             updateDoc(post.ref, {arrayOfLikedPersons: arrayUnion(currentUser.id)})
+            updateDoc(user.ref,{lastLikeInfo:lastLikeInfo})
             setIsLiked(true)
         }
     }
@@ -63,10 +77,21 @@ export function PostCard(props) {
             text: comment,
             commentOwner: currentUser.id
         };
+
+        const lastCommentInfo = {
+            firstName : currentUser.firstName,
+            lastName : currentUser.lastName,
+            post : post.id,
+            notificationImgUrl : post.photoUrl ? post.photoUrl : currentUser.profileImg
+        }
+
+
+
         const id = document.getElementById('text-input')
         id.value = ""
         navigate("/home")
         updateDoc(post.ref, {comments: arrayUnion(newComment)})
+        updateDoc(user.ref,{lastCommentInfo:lastCommentInfo})
     }
 
 

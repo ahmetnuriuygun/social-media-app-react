@@ -10,9 +10,8 @@ import PostsProvider from "./context/PostsContext";
 
 
 function App() {
-  const [{theme,isDark},toggleTheme] = useContext(ThemeContext);
+  const [{theme}] = useContext(ThemeContext);
 
-  console.log("theme",theme);
     return (
             <div className="App" style={{background:theme.backgroundColor,color:theme.color}}>
                     <UsersProvider>
