@@ -22,7 +22,10 @@ export function Home() {
                     </div>
                     <div className="main col-sm-12 col-lg-10  col-xl-6 min-vh-100"
                          style={{background: theme.backgroundColor, color: theme.color}}>
-                        <RandomPictures/>
+                        <div className='d-none d-lg-block'>
+                            <RandomPictures/>
+
+                        </div>
                         <PostInput/>
                         <Posts/>
                     </div>

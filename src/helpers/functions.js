@@ -1,4 +1,10 @@
-import {createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut} from "firebase/auth";
+import {
+    createUserWithEmailAndPassword,
+    getAuth,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    signOut
+} from "firebase/auth";
 import auth, {firestoreDB} from "./firebase";
 import {serverTimestamp} from 'firebase/firestore'
 
@@ -76,6 +82,19 @@ export const createUser = async (firstName, lastName, email, password, birthDate
     } catch (err) {
         toastErrorNotify(`${err.message}`)
     }
+}
+
+export const deleteUser = async () =>{
+
+    const user = auth.currentUser;
+
+    user.delete().then(() => {
+
+        // User deleted.
+    }).catch((error) => {
+        // An error ocurred
+        // ...
+    });
 }
 
 export const signIn = async (email, password, navigate) => {

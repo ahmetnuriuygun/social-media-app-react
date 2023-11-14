@@ -165,17 +165,14 @@ body,html,.row-offcanvas {
 .post-card{
     width: inherit;
     height: fit-content;
-    border-radius: 10px;
-    padding: 0.5em;
+    /*border-radius: 10px;*/
+    /*padding: 0.5em;*/
     background: white;
     margin-bottom: 1.5em;
 }
 .post-card .profile-img-card{
     display: inline;
     width: 10%;
-
-
-
 }
 .login-navbar{
     background: #3A5998;
@@ -188,10 +185,10 @@ body,html,.row-offcanvas {
 /*    padding: 10px;*/
 /*}*/
 .login-header{
-   font-size: xx-large;
-   font-weight: bolder;
+   /*font-size: xx-large;*/
+   /*font-weight: bolder;*/
    padding: 10px;
-    letter-spacing: 13px;
+    letter-spacing: 3px;
 
 }
 
@@ -268,4 +265,6 @@ body,html,.row-offcanvas {
 .profile-post-card{
     width: 50vw;
 }
-
+.post-input-form::placeholder{
+    font-size: small;
+}

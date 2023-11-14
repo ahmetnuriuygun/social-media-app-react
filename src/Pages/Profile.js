@@ -25,8 +25,11 @@ export function Profile() {
 
     return (
         <>
-            <NavigationBar/>
-            <ProfileCoverSection user={user} currentUser={currentUser}/>
+            <div className='p-3 p-lg-0'>
+                <NavigationBar/>
+                <ProfileCoverSection user={user} currentUser={currentUser}/>
+            </div>
+
 
             <hr/>
             <Tabs

@@ -8,7 +8,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCakeCandles, faHouseChimney} from "@fortawesome/free-solid-svg-icons";
 import * as PropTypes from "prop-types";
 import {UsersContext} from "../context/UsersContext";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {ThemeContext} from "../context/ThemeContext";
 
 export function ProfilePostsTab(props) {
@@ -29,13 +29,13 @@ export function ProfilePostsTab(props) {
         <>
             <Container>
                 <Row>
-                    <Col className='col-12 col-lg-4'>
+                    <Col className='col-12 col-lg-4   '>
                         <Tag user={user}/>
                     </Col>
                     <Col className='col-12 col-lg-8'>
-                        <Card className='bg-white border border-rounded w-100 p-0  ' id='profile-page-cards'>
+                        {/*<Card className=' w-100 p-0  ' id='profile-page-cards'>*/}
                             {user.id === currentUser.id ? <PostInput/> : ""}
-                        </Card>
+                        {/*</Card>*/}
                     </Col>
                 </Row>
 
@@ -75,7 +75,7 @@ function Tag(props) {
     }
 
     return (
-        <Card className=" border border-rounded p-3" id="profile-page-cards" style={{background:theme.backgroundColor,color:theme.color}}>
+        <Card className=" border border-rounded p-3 border-secondary" id="profile-page-cards" style={{background:theme.backgroundColor,color:theme.color}}>
             <h4>Tag</h4>
             {user.id === currentUser.id ?
                 <Button className="btn btn-secondary btn-block mt-2 ">Add Biography</Button> : ""}
@@ -98,6 +98,7 @@ function AllFriendsCard(props) {
     const [{theme}] = useContext(ThemeContext);
     const {user} = props;
     const users = useContext(UsersContext);
+    const navigate = useNavigate();
 
     let friendsArray = [];
 
@@ -109,8 +110,16 @@ function AllFriendsCard(props) {
         })
     })
     return (
-        <Card className=" border border-rounded p-3" id="profile-page-cards" style={{background:theme.backgroundColor,color:theme.color}}>
-            <Card.Title><h4 className="fw-bold">Friends</h4></Card.Title>
+        <Card className=" border border-secondary rounded p-3" id="profile-page-cards" style={{background:theme.backgroundColor,color:theme.color}}>
+            <Card.Title>
+                <div className='d-flex justify-content-between'>
+                    <h4 className="fw-bold d-inline">Friends</h4>
+                    <a className='text-primary' onClick={()=>navigate("/discover")}>Discover Friends</a>
+                </div>
+
+
+            </Card.Title>
+
             <Card.Text>{user.friendsAmount} friends</Card.Text>
             <Container>
                 <Row>

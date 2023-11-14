@@ -104,7 +104,7 @@ export function PostCard(props) {
 
 
     return (
-        <Card className='post-card' style={{background: theme.backgroundColor, color: theme.color}}>
+        <Card className='post-card border border-secondary rounded p-2' style={{background: theme.backgroundColor, color: theme.color}}>
             <Card.Body>
                 <Card.Title>
                     <img className='profile-img-card rounded-circle'

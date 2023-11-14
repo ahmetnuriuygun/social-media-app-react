@@ -97,7 +97,7 @@ export function PostInput() {
 
 
     return (
-        <Card className='my-3 rounded p-2' style={{background:theme.backgroundColor,color:theme.color}}>
+        <Card className='my-3 border border-secondary rounded p-2' style={{background:theme.backgroundColor,color:theme.color}}>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className='input-box'>
                     <Form.Label onClick={() => navigate(`/profile/${currentUser.id}`)}> <img className='dropdown-img'
@@ -105,7 +105,7 @@ export function PostInput() {
                     <InputGroup className="mb-3">
                         <Form.Control
                             placeholder={`What are you thinking, ${currentUser?.firstName.charAt(0).toUpperCase() + currentUser?.firstName.slice(1)} ?`}
-                            aria-describedby="basic-addon2" name="text" id='text-input'
+                            aria-describedby="basic-addon2" name="text" id='text-input' className='post-input-form'
                             onChange={(e) => setText(e.target.value)}
                         />
                         <Button variant="outline-secondary" id="button-addon2" type='submit'>

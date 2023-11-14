@@ -1,10 +1,14 @@
 import React, {useContext, useState} from "react";
 import {ThemeContext} from "../context/ThemeContext";
 import {useNavigate} from "react-router-dom";
-import {logOut} from "../helpers/functions";
+import {deleteUser, logOut} from "../helpers/functions";
 import BootstrapSwitchButton from "bootstrap-switch-button-react";
 import {Button, Form, Modal} from "react-bootstrap";
 import * as PropTypes from "prop-types";
+import { deleteDoc} from "firebase/firestore";
+import currentUserContext, {CurrentUserContext} from "../context/CurrentUserContext";
+import {toastErrorNotify, toastSuccessNotify} from "../helpers/toastNotify";
+import firebase from "../helpers/firebase";
 
 export function AccountManagement() {
 
@@ -13,8 +17,8 @@ export function AccountManagement() {
     const [showStopAccount, setShowStopAccount] = useState(false);
     const [showRemoveAccount, setShowRemoveAccount] = useState(false);
     const navigate = useNavigate();
-
-
+    const currentUser = useContext(CurrentUserContext);
+    console.log(currentUser)
     const stopAccount = () => {
         logOut(navigate)
     }
@@ -23,7 +27,18 @@ export function AccountManagement() {
         setShowStopAccount(false);
     }
 
-    const removeAccount = () => {
+    const removeAccount = async () => {
+        try {
+            await deleteUser();
+
+             await deleteDoc(currentUser.ref);
+            toastSuccessNotify("You removed your account,We hope see you again!🙂");
+
+            await logOut(navigate)
+
+        } catch(error) {
+            toastErrorNotify(error.message);
+        }
 
     }
 
