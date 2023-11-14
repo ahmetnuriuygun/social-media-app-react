@@ -47,7 +47,7 @@ function FriendSuggestionCard(props) {
         <Col sm={6} md={4}>
             <Link to={`/profile/${user.id}`}>
                 <Card style={{width: '12rem', height: "22rem"}} className='mt-3 ms-5 ms-sm-0'>
-                    <Card.Img variant="top" src={user.profileImg ? user.profileImg : `images/blank-profile.jpg`}
+                    <Card.Img variant="top" src={user.profileImg ? user.profileImg : `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png`}
                               style={{width: '12rem', height: '10rem'}}/>
                     <Card.Body style={{height: '4rem'}}>
                         <Card.Title>{user.firstName} {user.lastName}</Card.Title>

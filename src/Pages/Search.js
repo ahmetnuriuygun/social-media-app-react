@@ -1,9 +1,7 @@
 import {useParams} from "react-router-dom";
 import {NavigationBar} from "../Fragments/NavigationBar";
 import {LeftSidebar} from "../Fragments/LeftSidebar";
-import {RandomPictures} from "../Components/RandomPictures";
-import {PostInput} from "../Components/PostInput";
-import {Posts} from "../Components/Posts";
+
 import {RightSidebar} from "../Fragments/RightSidebar";
 import {useContext} from "react";
 import {ThemeContext} from "../context/ThemeContext";
@@ -13,13 +11,12 @@ import {UsersContext} from "../context/UsersContext";
 
 export function Search(){
     const searchValue = useParams();
-    console.log(searchValue);
     const [{theme}] = useContext(ThemeContext);
     const currentUser = useContext(CurrentUserContext);
     const users = useContext(UsersContext);
 
     const filteredUsers = ()=>{
-        const filter = users?.filter(u =>
+        const filter = users.filter(u =>
             u.firstName.includes(searchValue.value.toUpperCase())
         ||  u.lastName.includes(searchValue.value.toUpperCase()))
         filter.forEach(u=>{

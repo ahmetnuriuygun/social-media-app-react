@@ -32,11 +32,14 @@ export function PostCard(props) {
 
 
     })
-
     const [isLiked, setIsLiked] = useState(false);
-    const [likeCounter, setLikeCounter] = useState(3)
+    const [likeCounter, setLikeCounter] = useState(3);
 
-    const likePost = () => {
+
+    console.log(isLiked);
+    console.log(likeCounter);
+
+    const likePost = async (e) => {
 
         const lastLikeInfo = {
             firstName: currentUser.firstName,
@@ -45,19 +48,23 @@ export function PostCard(props) {
             notificationImgUrl: post.photoUrl ? post.photoUrl : currentUser.profileImg
 
         }
-
-        setLikeCounter(likeCounter + 1);
-
+        setIsLiked(true)
+        e.preventDefault();
         if (likeCounter % 2 === 0) {
-            updateDoc(post.ref, {likesAmount: post.likesAmount - 1});
-            setIsLiked(false);
+            await updateDoc(post.ref, {likesAmount: post.likesAmount - 1});
+            await setIsLiked(false);
+
+        } else {
+            await updateDoc(post.ref, {likesAmount: post.likesAmount + 1});
+            await    setIsLiked(true);
+
+            await updateDoc(post.ref, {arrayOfLikedPersons: arrayUnion(currentUser.id)})
+            await updateDoc(user.ref, {lastLikeInfo: lastLikeInfo})
         }
-        else {
-            updateDoc(post.ref, {likesAmount: post.likesAmount + 1});
-            updateDoc(post.ref, {arrayOfLikedPersons: arrayUnion(currentUser.id)})
-            updateDoc(user.ref, {lastLikeInfo: lastLikeInfo})
-            setIsLiked(true);
-        }
+        await setLikeCounter(likeCounter + 1);
+
+
+
     }
 
 
@@ -134,8 +141,10 @@ export function PostCard(props) {
                         <div id="example-collapse-text">
                             <Card body style={{background: theme.backgroundColor, color: theme.color, width: 'inherit'}}>
                                 <Form.Group className='input-box'>
-                                    <Form.Label> <img className='dropdown-img'
-                                                      src={profileImgUserOfCommented ? profileImgUserOfCommented : `images/blank-profile.jpg`}/></Form.Label>
+                                    <Form.Label>
+                                        <img className='dropdown-img'
+                                                      src={profileImgUserOfCommented ? profileImgUserOfCommented : `images/blank-profile.jpg`}/>
+                                    </Form.Label>
                                     <InputGroup className="mb-3">
 
                                         <div id="commentDisplay">

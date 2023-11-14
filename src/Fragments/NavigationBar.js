@@ -80,7 +80,6 @@ NotificationDropDown.propTypes = {currentUser: PropTypes.any};
 
 function NotificationDropDown(props) {
     const {currentUser} = props;
-    console.log(currentUser.receiveFriendRequest)
     return (
         <Dropdown>
             <Dropdown.Toggle variant="secondary-outline" id="dropdown-basic">
