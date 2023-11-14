@@ -19,7 +19,7 @@ export function ProfileAboutTab(props) {
     const {user} = props;
     const currentUser = useContext(CurrentUserContext);
 
-    const [isReadOnly, setIsReadOnly] = useState(!(currentUser.id === user.id))
+    const [isReadOnly, setIsReadOnly] = useState(!(currentUser?.id === user?.id))
 
     const [userToEdit, setUserToEdit] = useState(user);
 
