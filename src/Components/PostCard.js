@@ -142,8 +142,8 @@ export function PostCard(props) {
                             <Card body style={{background: theme.backgroundColor, color: theme.color, width: 'inherit'}}>
                                 <Form.Group className='input-box'>
                                     <Form.Label>
-                                        <img className='dropdown-img'
-                                                      src={profileImgUserOfCommented ? profileImgUserOfCommented : `images/blank-profile.jpg`}/>
+                                        {/*<img className='dropdown-img'*/}
+                                        {/*              src={profileImgUserOfCommented ? profileImgUserOfCommented : `images/blank-profile.jpg`}/>*/}
                                     </Form.Label>
                                     <InputGroup className="mb-3">
 
