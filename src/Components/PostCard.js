@@ -106,7 +106,7 @@ export function PostCard(props) {
     return (
         <Card className='post-card border border-secondary rounded p-2' style={{background: theme.backgroundColor, color: theme.color}}>
             <Card.Body>
-                <Card.Title>
+                <Card.Title onClick={() => navigate(`/profile/${user.id}`)}>
                     <img className='profile-img-card rounded-circle'
                          src={profileImg ? profileImg : `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png`}/>
                     <span className='h5 text-capitalize ms-3'>{firstName} {lastName}</span>
@@ -134,8 +134,11 @@ export function PostCard(props) {
                         <div id="example-collapse-text">
                             <Card body style={{background: theme.backgroundColor, color: theme.color, width: 'inherit'}}>
                                 <Form.Group className='input-box'>
-                                    <Form.Label> <img className='dropdown-img'
-                                                      src={profileImgUserOfCommented ? profileImgUserOfCommented : `images/blank-profile.jpg`}/></Form.Label>
+                                    <Card.Title>
+                                        <img className='dropdown-img'
+                                             src={profileImgUserOfCommented ? profileImgUserOfCommented : `images/blank-profile.jpg`}/>
+                                    </Card.Title>
+
                                     <InputGroup className="mb-3">
 
                                         <div id="commentDisplay">

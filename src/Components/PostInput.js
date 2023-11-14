@@ -100,8 +100,13 @@ export function PostInput() {
         <Card className='my-3 border border-secondary rounded p-2' style={{background:theme.backgroundColor,color:theme.color}}>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className='input-box'>
-                    <Form.Label onClick={() => navigate(`/profile/${currentUser.id}`)}> <img className='profile-img-card rounded-circle'
-                                                                                             src={currentUser?.profileImg ? currentUser.profileImg : `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png`}/></Form.Label>
+
+                        <Card.Title onClick={() => navigate(`/profile/${currentUser.id}`)}>
+
+                            <img className='profile-img-card rounded-circle'
+                                 src={currentUser?.profileImg ? currentUser.profileImg : `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png`}/>
+
+                        </Card.Title>
                     <InputGroup className="mb-3">
                         <Form.Control
                             placeholder={`What are you thinking, ${currentUser?.firstName.charAt(0).toUpperCase() + currentUser?.firstName.slice(1)} ?`}
