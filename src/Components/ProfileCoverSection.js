@@ -7,6 +7,8 @@ import * as PropTypes from "prop-types";
 import {CurrentUserContext} from "../context/CurrentUserContext";
 import {UsersContext} from "../context/UsersContext";
 import {acceptFriend, refuseFriend} from "../helpers/functions";
+import {arrayUnion, updateDoc} from "firebase/firestore";
+import {toastErrorNotify, toastInfoNotify} from "../helpers/toastNotify";
 
 export function ProfileCoverSection(props) {
     const {id} = useParams();
@@ -34,6 +36,21 @@ export function ProfileCoverSection(props) {
 
     })
 
+    const sendFriendRequest = async () => {
+        try{
+            updateDoc(currentUser.ref, {sendFriendRequest: arrayUnion(user.id)})
+            updateDoc(user.ref, {receiveFriendRequest: arrayUnion(currentUser.id)})
+                .then(()=>{
+                    toastInfoNotify(`You sent friend request to ${user.firstName} ${user.lastName}`)
+                })
+        }catch(err){
+            toastErrorNotify(err.message)
+        }
+
+
+
+    }
+
     return (
         <div className="d-flex flex-column flex-lg-row justify-content-lg-around mt-5">
             <div className="d-flex flex-row ">
@@ -56,7 +73,10 @@ export function ProfileCoverSection(props) {
                         <div className="mt-5 ms-3 ms-lg-0 me-lg-2">
                             <Button className="btn btn-primary"><FontAwesomeIcon
                                 icon={faMessage} className="me-2"/>Send a message</Button>
-                        </div> : ""
+                        </div> :
+                    <div className="mt-5 ms-3 ms-lg-0 me-lg-2">
+                    <Button variant="primary" className='btn btn-primary' onClick={sendFriendRequest}>Add friend</Button>
+                    </div>
                 }
                 {currentUser.receiveFriendRequest.includes(user.id) ?
                         <div className="mt-5 ms-3 ms-lg-0 me-lg-2">
