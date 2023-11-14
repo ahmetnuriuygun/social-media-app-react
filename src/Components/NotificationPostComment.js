@@ -10,7 +10,7 @@ export function NotificationPostComment() {
         <>
             <DropdownItemText><img
                 src={currentUser.lastCommentInfo.notificationImgUrl ? currentUser.lastCommentInfo.notificationImgUrl : `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png} className='img-fluid rounded`}
-                className='img-fluid rounded' width='50rem'/>
+                className='profile-img-card rounded-circle' width='50rem'/>
                 <span
                     className='dropdown-font'><span
                     className='text-capitalize'>{currentUser.lastCommentInfo.firstName} {currentUser.lastCommentInfo.lastName}</span> commented your post</span>

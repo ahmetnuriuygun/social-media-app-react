@@ -33,9 +33,8 @@ export function ProfilePostsTab(props) {
                         <Tag user={user}/>
                     </Col>
                     <Col className='col-12 col-lg-8'>
-                        {/*<Card className=' w-100 p-0  ' id='profile-page-cards'>*/}
                             {user.id === currentUser.id ? <PostInput/> : ""}
-                        {/*</Card>*/}
+
                     </Col>
                 </Row>
 
@@ -43,7 +42,7 @@ export function ProfilePostsTab(props) {
                     <Col className='col-12 col-lg-4 '>
                         <AllFriendsCard user={user}/>
                     </Col>
-                    <Col className='col-12 col-lg-8 profile-post-card '>
+                    <Col className='col-12 col-lg-8  '>
                         {postsOfUser.map(p => <PostCard key={p.id} post={p}/>)}
                     </Col>
                 </Row>

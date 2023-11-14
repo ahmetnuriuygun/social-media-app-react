@@ -6,7 +6,7 @@ import {
     signOut
 } from "firebase/auth";
 import auth, {firestoreDB} from "./firebase";
-import {serverTimestamp} from 'firebase/firestore'
+import {arrayRemove, serverTimestamp} from 'firebase/firestore'
 
 import {addDoc, arrayUnion, collection, updateDoc} from "firebase/firestore";
 import {toastErrorNotify, toastInfoNotify, toastSuccessNotify} from "./toastNotify";
@@ -195,6 +195,43 @@ export const addPost = async (text, ownerId, photoUrl, currentUser,navigate) => 
     catch(err){
         toastErrorNotify("Oops,A problem is occurred while sharing post")
     }
+}
+
+export const acceptFriend = async (currentUser,userWaitingToResponse,users,onShow) => {
+    try {
+        updateDoc(currentUser?.ref, {friends: arrayUnion(userWaitingToResponse.id)},
+            updateDoc(currentUser?.ref, {friendsAmount: currentUser?.friendsAmount + 1}),
+            updateDoc(currentUser?.ref, {receiveFriendRequest: arrayRemove(userWaitingToResponse.id)}))
+
+        users?.forEach(u => {
+            currentUser?.receiveFriendRequest?.forEach(r => {
+                if (u.id === currentUser?.receiveFriendRequest[0]) {
+                    updateDoc(u.ref, {friends: arrayUnion(currentUser?.id)},
+                        updateDoc(u.ref, {sendFriendRequest: arrayRemove(currentUser?.id)}),
+                        updateDoc(u.ref, {friendsAmount: u.friendsAmount + 1}));
+                }
+            })
+        })
+    } catch (err) {
+        toastErrorNotify(err.message);
+    }
+
+    onShow(false);
+    toastInfoNotify(`You accepted friend request`);
+
+}
+
+export const refuseFriend = (currentUser,userWaitingToResponse,users,onShow) => {
+    updateDoc(currentUser?.ref, {receiveFriendRequest: arrayRemove(userWaitingToResponse.id)})
+    users?.forEach(u => {
+        currentUser?.receiveFriendRequest?.forEach(r => {
+            if (u.id === currentUser.receiveFriendRequest[0]) {
+                updateDoc(u.ref, {sendFriendRequest: arrayRemove(currentUser.id)});
+
+            }
+        })
+    })
+    onShow(false)
 }
 
 

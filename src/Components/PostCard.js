@@ -132,7 +132,7 @@ export function PostCard(props) {
 
                     <Collapse in={openCommentSection} dimension="width">
                         <div id="example-collapse-text">
-                            <Card body style={{background: theme.backgroundColor, color: theme.color, width: '600px'}}>
+                            <Card body style={{background: theme.backgroundColor, color: theme.color, width: 'inherit'}}>
                                 <Form.Group className='input-box'>
                                     <Form.Label> <img className='dropdown-img'
                                                       src={profileImgUserOfCommented ? profileImgUserOfCommented : `images/blank-profile.jpg`}/></Form.Label>

@@ -2,14 +2,38 @@ import {useNavigate, useParams} from "react-router-dom";
 import {Button} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMessage, faPen} from "@fortawesome/free-solid-svg-icons";
-import React from "react";
+import React, {useContext, useState} from "react";
 import * as PropTypes from "prop-types";
+import {CurrentUserContext} from "../context/CurrentUserContext";
+import {UsersContext} from "../context/UsersContext";
+import {acceptFriend, refuseFriend} from "../helpers/functions";
 
 export function ProfileCoverSection(props) {
     const {id} = useParams();
-
+    const users = useContext(UsersContext);
     const {user, currentUser} = props;
     const navigate = useNavigate();
+
+
+    const [show, onShow] = useState(currentUser?.receiveFriendRequest.length !== 0);
+
+
+    // const { onShow} = props;
+    const userWaitingToResponse = {};
+
+
+    users.forEach(u => {
+        currentUser?.receiveFriendRequest.forEach(r => {
+            if (u.id === currentUser?.receiveFriendRequest[0]) {
+                userWaitingToResponse['firstName'] = u.firstName
+                userWaitingToResponse['lastName'] = u.lastName
+                userWaitingToResponse['profileImg'] = u.profileImg
+                userWaitingToResponse['id'] = u.id;
+            }
+        })
+
+    })
+
     return (
         <div className="d-flex flex-column flex-lg-row justify-content-lg-around mt-5">
             <div className="d-flex flex-row ">
@@ -26,14 +50,22 @@ export function ProfileCoverSection(props) {
                 <div className="mt-5 ms-3 ms-lg-0 me-lg-2">
                     <Button className="btn btn-secondary" onClick={() => navigate(`/settings/${id}`)}><FontAwesomeIcon
                         icon={faPen} className="me-2"/>Edit Profile</Button>
-                </div> :
-
-                <div className="mt-5 ms-3 ms-lg-0 me-lg-2">
-                    <Button className="btn btn-primary"><FontAwesomeIcon
-                        icon={faMessage} className="me-2"/>Send a message</Button>
                 </div>
+                : ""}
+                {currentUser.friends.includes(user.id) ?
+                        <div className="mt-5 ms-3 ms-lg-0 me-lg-2">
+                            <Button className="btn btn-primary"><FontAwesomeIcon
+                                icon={faMessage} className="me-2"/>Send a message</Button>
+                        </div> : ""
+                }
+                {currentUser.receiveFriendRequest.includes(user.id) ?
+                        <div className="mt-5 ms-3 ms-lg-0 me-lg-2">
+                            <Button className='btn btn-primary me-2 w-50' onClick={()=>acceptFriend(currentUser,userWaitingToResponse,users,onShow)}>Accept</Button>
+                            <Button className='btn btn-secondary mt-2 w-50' onClick={()=>refuseFriend(currentUser,userWaitingToResponse,users,onShow)}>Cancel</Button>
 
-            }
+                        </div> : ""
+                }
+
         </div>
     );
 }
