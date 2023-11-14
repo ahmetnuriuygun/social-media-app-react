@@ -134,11 +134,8 @@ export function PostCard(props) {
                         <div id="example-collapse-text">
                             <Card body style={{background: theme.backgroundColor, color: theme.color, width: 'inherit'}}>
                                 <Form.Group className='input-box'>
-                                    <Card.Title>
-                                        <img className='profile-img-card rounded-circle'
-                                             src={profileImgUserOfCommented ? profileImgUserOfCommented : `images/blank-profile.jpg`}/>
-                                    </Card.Title>
-
+                                    <Form.Label> <img className='dropdown-img'
+                                                      src={profileImgUserOfCommented ? profileImgUserOfCommented : `images/blank-profile.jpg`}/></Form.Label>
                                     <InputGroup className="mb-3">
 
                                         <div id="commentDisplay">

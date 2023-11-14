@@ -101,11 +101,11 @@ export function PostInput() {
             <Form onSubmit={handleSubmit}>
                 <Form.Group className='input-box'>
 
-                        <Card.Title onClick={() => navigate(`/profile/${currentUser.id}`)}>
+                        <div onClick={() => navigate(`/profile/${currentUser.id}`)}>
 
-                            <img className='w-75 rounded-circle'
-                                 src={currentUser?.profileImg ? currentUser.profileImg : `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png`}/>
-                        </Card.Title>
+                           <img className='w-75 rounded-circle'
+                                    src={currentUser?.profileImg ? currentUser.profileImg : `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png`}/>
+                        </div>
                     <InputGroup className="mb-3">
                         <Form.Control
                             placeholder={`What are you thinking, ${currentUser?.firstName.charAt(0).toUpperCase() + currentUser?.firstName.slice(1)} ?`}
