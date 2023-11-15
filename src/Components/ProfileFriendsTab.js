@@ -10,6 +10,7 @@ export function ProfileFriendsTab(props) {
     const {user} = props;
     const users = useContext(UsersContext);
     const [{theme}] = useContext(ThemeContext);
+    const currentUser = useContext(CurrentUserContext)
 
 
     const friendsArray = []
@@ -24,7 +25,8 @@ export function ProfileFriendsTab(props) {
 
     return (
         <div className='mt-3 text-center'>
-            <h4>Your friends</h4>
+            {currentUser.id===user.id ? <h4>Your friends</h4> : <h4 className='text-capitalize'>Friends of {user.firstName} {user.lastName}</h4>}
+
 
             <Container style={{background:theme.backgroundColor,color:theme.color,minHeight:'100vh'}}>
                 <Row>

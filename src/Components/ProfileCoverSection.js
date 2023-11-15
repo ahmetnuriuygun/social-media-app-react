@@ -69,15 +69,27 @@ export function ProfileCoverSection(props) {
                         icon={faPen} className="me-2"/>Edit Profile</Button>
                 </div>
                 : ""}
-                {currentUser.friends.includes(user.id) ?
+                {currentUser.friends.includes(user.id)  ?
                         <div className="mt-5 ms-3 ms-lg-0 me-lg-2">
                             <Button className="btn btn-primary"><FontAwesomeIcon
                                 icon={faMessage} className="me-2"/>Send a message</Button>
-                        </div> :
-                    <div className="mt-5 ms-3 ms-lg-0 me-lg-2">
-                    <Button variant="primary" className='btn btn-primary' onClick={sendFriendRequest}>Add friend</Button>
-                    </div>
+                        </div> : ""
+
                 }
+
+            {!currentUser.friends.includes(user.id) && user.id!==currentUser.id && !currentUser.sendFriendRequest.includes(user.id) && !currentUser.receiveFriendRequest.includes(user.id)  ?
+                <div className="mt-5 ms-3 ms-lg-0 me-lg-2">
+                    <Button variant="primary" className='btn btn-primary' onClick={sendFriendRequest}>Add friend</Button>
+                </div> : ""
+
+            }
+
+            {currentUser.sendFriendRequest.includes(user.id) && user.id!==currentUser.id ?
+                <div className="mt-5 ms-3 ms-lg-0 me-lg-2">
+                    <Button variant="warning" className='btn btn-primary' >Friend Requested Sent</Button>
+                </div> : ""
+
+            }
                 {currentUser.receiveFriendRequest.includes(user.id) ?
                         <div className="mt-5 ms-3 ms-lg-0 me-lg-2">
                             <Button className='btn btn-primary me-2 w-50' onClick={()=>acceptFriend(currentUser,userWaitingToResponse,users,onShow)}>Accept</Button>

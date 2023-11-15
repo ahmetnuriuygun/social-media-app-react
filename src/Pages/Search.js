@@ -17,8 +17,8 @@ export function Search(){
 
     const filteredUsers = ()=>{
         const filter = users.filter(u =>
-            u.firstName.includes(searchValue.value.toUpperCase())
-        ||  u.lastName.includes(searchValue.value.toUpperCase()))
+            u.firstName.includes(searchValue.value)
+        ||  u.lastName.includes(searchValue.value))
         filter.forEach(u=>{
             if(u.id===currentUser.id){
                 const index = filter.indexOf(u)
