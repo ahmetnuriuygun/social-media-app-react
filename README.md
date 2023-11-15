@@ -18,31 +18,50 @@ SOLUTION
 ├── public
 │     └── index.html
 ├── src
-│    ├── components
-│    │       ├── LefSidebar
-│    │       ├── Navbar
-│    │       └── PostInput
-│    │       └── Posts
-│    │       └── RandomPicture
-│    │       └── RightSidebar
-│    │       └── ....
+│    ├── Components
+│    │       ├── AccountManagement.js
+│    │       ├── FriendRequestCard.js
+│    │       └── FriendSuggestions.js
+│    │       └── NotificationFriendRequest.js
+│    │       └── NotificationPostComment.js
+│    │       └── NotificationPostLike.js
+│    │       └── PostCard.js
+│    │       └── PostInput.js
+│    │       └── Posts.js
+│    │       └── PremiumContent.js
+│    │       └── ProfileAboutTab.js
+│    │       └── ProfileCoverSection.js
+│    │       └── ProfileFriendsTab.js
+│    │       └── ProfilePostsTab.js
+│    │       └── RandomPictures.js
+│    │       └── UpdateProfile.js
 │    │ 
-│    │       
-│    │       
+│    ├── Context
+│    │       └── CurrentUserContext.js
+│    │       └── PostsContext.js
+│    │       └── ThemeContext.js
+│    │       └── UsersContext.js
+│    │
+│    ├── Fragments
+│    │    ├── LeftSidebar.js
+│    │    ├── NavigationBar.js
+│    │    ├── RightSideBar.js
+│    │
 │    ├── helpers
 │    │       ├── firebase.js
-│    │       
+│    │       ├── functions.js
+│    │       ├── toastNotify.js
+│    │
 │    ├── pages
-│    │       ├── Pages.js
+│    │       ├── Discover.js
 │    │       ├── Home.js
 │    │       ├── LoginRegister.js
-│    │       ├── Register.js
-│    │       ├── Marketplace.js
-│    │       ├── Message.js
 │    │       ├── Profile.js
-│    │       └── News.js
-│    ├── assets.js
-│    │       └── [images]
+│    │       ├── Search.js
+│    │       ├── Settings.js
+│    │       
+│    ├── Router
+│    │       └── AppRouter
 │    ├── App.js
 │    ├── App.css
 │    ├── index.js
